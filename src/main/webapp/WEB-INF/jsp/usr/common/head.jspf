@@ -27,3 +27,36 @@
 		</div>
 	</section>
 	<main>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet"> 
+
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+header {
+  font-family: "Hi Melody", cursive;
+}
+</style>
+<header>
+<div class="w-9/12 mx-auto mt-19">
+  <ol class="flex justify-around text-1xl">
+    <li class="hover:underline"><a href="#">뭐가 맛있지?</a></li>
+    <li class="hover:underline"><a href="#">누가낼까?</a></li>
+    <li class="hover:underline"><a href="#">어디갈까?</a></li>
+    <li class="hover:underline"><a href="#">내 페이지</a></li>
+  </ol>
+  <ul class="text-right">
+    <li><a href="#">로그인</a>/<a href="#"></a>회원가입</li>
+  </ul>
+  <div>
+
+  </div>
+</div>
+
+<div class="">
+  <a href="/">
+    <div class="absolute top-0 w-20"><img src="https://i.ibb.co/k6KGksK/logo.jpg" alt="logo" border="0"></div>
+  </a>
+</div>
+</header>
