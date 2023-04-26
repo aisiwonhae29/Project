@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.MemberService;
+import com.KoreaIT.sw.demo.vo.ResultData;
 
 @Controller
 public class UsrMemberController {
@@ -15,20 +16,52 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String userId, String userPw, String userName, int userAge, String userLocation, String userGender) {
+	public Object doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
+		if(userid==null) {
+			return ResultData.from("f-1", "Id를 입력해주세요"); 
+		}
+		if(userpw==null) {
+			return ResultData.from("f-2", "Pw를 입력해주세요"); 
+		}
+		if(username==null) {
+			return ResultData.from("f-3", "이름를 입력해주세요"); 
+		}
+		if(userage==0) {
+			return ResultData.from("f-4", "나이를 입력해주세요"); 
+		}
+		if(userlocation==null) {
+			return ResultData.from("f-5", "지역를 입력해주세요"); 
+		}
+		if(usergender==null) {
+			return ResultData.from("f-6", "성별를 입력해주세요"); 
+		}
 		
-		memberService.join(userId, userPw, userName, userAge, userLocation, userGender);
+		memberService.join(userid, userpw, username, userage, userlocation, usergender);
 		
-		return userId;
+		return 1;
 	}
 		
 	@RequestMapping("/usr/memner/doLogin")
 	@ResponseBody
-	public String doLogin(String userId, String userPw) {
+	public String doLogin(String userid, String userpw) {
 		
-		return userId;
+		memberService.login(userid, userpw);
+		
+		return userid;
 	}
 	
+	
+	@RequestMapping("/usr/member/practice")
+	@ResponseBody
+	public Object practice(String name) {
+		memberService.practice("하이");
+		ResultData rd=null;
+		if(name==null) {
+			rd=ResultData.from("f-1", "Id를 입력해주세요");
+			return rd; 
+		}
+		return "success";
+	}
 	
 //	@Autowired
 //	private MemberService memberService;

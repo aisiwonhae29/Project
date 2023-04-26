@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Member {
+public class Location {
 	private int id;
-	private String userid;
-	private String userow;
-	private String userlocation;
-	private String usergender;
-	private int userage;
+	private String userId;
+	private String userPw;
+	private String userLocation;
+	private String userGender;
+	private int userAge;
 }
