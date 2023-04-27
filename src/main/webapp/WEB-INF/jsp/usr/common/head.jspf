@@ -47,7 +47,7 @@ header {
     <li class="hover:underline"><a href="#">내 페이지</a></li>
   </ol>
   <ul class="text-right">
-    <li><a href="#">로그인</a>/<a href="#"></a>회원가입</li>
+    <li><a href="/usr/member/login">로그인</a>/<a href="#"></a>회원가입</li>
   </ul>
   <div>
 

@@ -1,5 +1,9 @@
 package com.KoreaIT.sw.demo.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +67,16 @@ public class UsrMemberController {
 		return "success";
 	}
 	
+	@RequestMapping("/usr/member/geta")
+	@ResponseBody
+	public String getPractice() {
+		return memberService.getPractice().toString();
+	}
+	@RequestMapping("/usr/member/login")
+	public String showLogin() {
+		return "usr/member/login";
+	}
+
 //	@Autowired
 //	private MemberService memberService;
 //

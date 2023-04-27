@@ -1,9 +1,12 @@
 package com.KoreaIT.sw.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.KoreaIT.sw.demo.repository.MemberRepository;
 import com.KoreaIT.sw.demo.vo.Member;
+import com.KoreaIT.sw.demo.vo.a;
 
 @Service
 public class MemberService {
@@ -29,5 +32,9 @@ public class MemberService {
 	private Member getMemberByuserId(String userid) {
 		Member member = memberRepository.getMemberByuserId(userid);
 		return member;
+	}
+
+	public List getPractice() {
+		return memberRepository.getPractice();
 	}
 }
