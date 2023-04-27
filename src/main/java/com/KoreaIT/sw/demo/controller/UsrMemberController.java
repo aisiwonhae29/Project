@@ -20,7 +20,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public Object doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
+	public ResultData doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
 		if(userid==null) {
 			return ResultData.from("f-1", "Id를 입력해주세요"); 
 		}
@@ -42,23 +42,25 @@ public class UsrMemberController {
 		
 		memberService.join(userid, userpw, username, userage, userlocation, usergender);
 		
-		return 1;
+		return ResultData.from("s-1", "가입에 성공하였습니다!");
 	}
 		
 	@RequestMapping("/usr/memner/doLogin")
 	@ResponseBody
-	public String doLogin(String userid, String userpw) {
-		
+	public ResultData doLogin(String userid, String userpw) {
+		if(userid==null) {
+			return ResultData.from("f-1", "Id를 입력해주세요");
+		}
 		memberService.login(userid, userpw);
 		
-		return userid;
+		return ResultData.from("s-1", "로그인에 성공하였습니다")1;
 	}
 	
 	
 	@RequestMapping("/usr/member/practice")
 	@ResponseBody
 	public Object practice(String name) {
-		memberService.practice("하이");
+		memberService.practice(name);
 		ResultData rd=null;
 		if(name==null) {
 			rd=ResultData.from("f-1", "Id를 입력해주세요");
@@ -72,11 +74,17 @@ public class UsrMemberController {
 	public String getPractice() {
 		return memberService.getPractice().toString();
 	}
+	
 	@RequestMapping("/usr/member/login")
 	public String showLogin() {
 		return "usr/member/login";
 	}
-
+	
+	@RequestMapping("/usr/member/join")
+	public String showjoin() {
+		return "usr/member/join";
+	}
+	
 //	@Autowired
 //	private MemberService memberService;
 //
