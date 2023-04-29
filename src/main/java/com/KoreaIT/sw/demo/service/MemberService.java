@@ -37,4 +37,8 @@ public class MemberService {
 	public List getPractice() {
 		return memberRepository.getPractice();
 	}
+
+	public Member getMemberById(int loginedMemberId) {
+		return memberRepository.getMemberById(loginedMemberId);
+	}
 }

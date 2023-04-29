@@ -1,8 +1,7 @@
 package com.KoreaIT.sw.demo.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.MemberService;
 import com.KoreaIT.sw.demo.vo.ResultData;
+import com.KoreaIT.sw.demo.vo.Rq;
 
 @Controller
 public class UsrMemberController {
+	private HttpServletRequest req;
+	private HttpServletResponse resp;
 	
 	@Autowired
 	MemberService memberService;
@@ -39,7 +41,7 @@ public class UsrMemberController {
 		if(usergender==null) {
 			return ResultData.from("f-6", "성별를 입력해주세요"); 
 		}
-		
+		Rq rq = new Rq(req, resp, memberService);
 		memberService.join(userid, userpw, username, userage, userlocation, usergender);
 		
 		return ResultData.from("s-1", "가입에 성공하였습니다!");
@@ -53,7 +55,7 @@ public class UsrMemberController {
 		}
 		memberService.login(userid, userpw);
 		
-		return ResultData.from("s-1", "로그인에 성공하였습니다")1;
+		return ResultData.from("s-1", "로그인에 성공하였습니다");
 	}
 	
 	

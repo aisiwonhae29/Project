@@ -11,6 +11,9 @@ import com.KoreaIT.sw.demo.vo.a;
 
 @Mapper
 public interface MemberRepository  {
+	
+	@Select("select * from `member` where id=#{loginedMemberId}")
+	public Member getMemberById(int loginedMemberId); 
 
 	@Select("insert into `member` set ")
 	public String doJoin();

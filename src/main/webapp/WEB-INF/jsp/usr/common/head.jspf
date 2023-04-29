@@ -45,6 +45,7 @@ header {
     <li class="hover:underline"><a href="#">누가낼까?</a></li>
     <li class="hover:underline"><a href="#">어디갈까?</a></li>
     <li class="hover:underline"><a href="#">내 페이지</a></li>
+    <li class="hover:underline"><a href="/usr/practice/practice ">PMP</a></li>
   </ol>
   <ul class="text-right">
     <li><a href="/usr/member/login">로그인</a>/<a href="/usr/member/join">회원가입</a></li>
