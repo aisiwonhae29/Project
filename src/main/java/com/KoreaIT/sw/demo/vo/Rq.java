@@ -14,12 +14,17 @@ import org.springframework.stereotype.Component;
 
 import com.KoreaIT.sw.demo.service.MemberService;
 import com.KoreaIT.sw.demo.util.Ut;
+
+import lombok.Getter;
 //@scope is belong to Component, componenets automatically manage baen data and it deals with scope
-//@Component
-//@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
+	@Getter
 	private boolean isLogined;
+	@Getter
 	private int loginedMemberId;
+	@Getter
 	private Member loginedMember;
 	
 	private HttpServletRequest req;
@@ -59,5 +64,26 @@ public class Rq {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public void println(String str) {
+		print(str+"\n");
+	}
+	public void login(Member member) {
+		session.setAttribute("loginedMemberId", member.getId());
+	}
+	public void logout() {
+		session.removeAttribute("loginedMemberId");
+	}
+	public String jsHistoryBack(String resultCode, String msg) {
+		return Ut.jsHitoryBack(resultCode, msg);
+	}
+	public String jsReplace(String msg, String uri) {
+		return Ut.jsReplace(msg, uri);
+	}
+	public String getCurrentUri() {
+		String currentUri = req.getRequestURI();
+		String QueryString = req.getQueryString();
+		
+		return currentUri;
 	}
 }

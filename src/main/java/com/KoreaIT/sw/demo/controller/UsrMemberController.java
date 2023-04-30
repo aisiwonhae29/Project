@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.MemberService;
+import com.KoreaIT.sw.demo.util.Ut;
 import com.KoreaIT.sw.demo.vo.ResultData;
 import com.KoreaIT.sw.demo.vo.Rq;
 
@@ -19,11 +20,13 @@ public class UsrMemberController {
 	
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	private Rq rq;
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
-		if(userid==null) {
+		if(userid==null ) {
 			return ResultData.from("f-1", "Id를 입력해주세요"); 
 		}
 		if(userpw==null) {
@@ -47,15 +50,20 @@ public class UsrMemberController {
 		return ResultData.from("s-1", "가입에 성공하였습니다!");
 	}
 		
-	@RequestMapping("/usr/memner/doLogin")
+	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData doLogin(String userid, String userpw) {
-		if(userid==null) {
-			return ResultData.from("f-1", "Id를 입력해주세요");
+	public String doLogin(String userid, String userpw) {
+		if(userid.equals(null) || userid.trim().length()==0) {
+			return Ut.jsHitoryBack("f-1", "Id를 입력해주세요");
+		}
+//		rq.print("Asdasd");
+		if(userpw==null || userid.trim().length()==0) {
+			return Ut.jsHitoryBack("f-1","Pw를 입력해주세요");
 		}
 		memberService.login(userid, userpw);
 		
-		return ResultData.from("s-1", "로그인에 성공하였습니다");
+		return Ut.jsHitoryBack("asd", "df");
+//		return Ut.jsReplace("S-1", "환영합니다", "/");
 	}
 	
 	
