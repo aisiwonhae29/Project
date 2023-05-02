@@ -12,7 +12,7 @@
     <div>pw</div><input type="text" name="userpw" />
   </div>
   <div class="submit_box">
-  	<input type="submit" value="login"/>
+  	<button type="submit">login</button>
   	<!-- <a href="../member/doLogin" type="submit">log in</a> -->
   </div><br>
  </form>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.MemberService;
 import com.KoreaIT.sw.demo.util.Ut;
+import com.KoreaIT.sw.demo.vo.Member;
 import com.KoreaIT.sw.demo.vo.ResultData;
 import com.KoreaIT.sw.demo.vo.Rq;
 
@@ -25,47 +26,62 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
-		if(userid==null ) {
-			return ResultData.from("f-1", "Id를 입력해주세요"); 
+	public String doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
+		if(Ut.empty(userid) ) {
+			return Ut.jsHitoryBack("f-1", "Id를 입력해주세요");
 		}
-		if(userpw==null) {
-			return ResultData.from("f-2", "Pw를 입력해주세요"); 
+		if(Ut.empty(userpw)) {
+			return Ut.jsHitoryBack("f-2", "PW를 입력해주세요");
 		}
-		if(username==null) {
-			return ResultData.from("f-3", "이름를 입력해주세요"); 
+		if(Ut.empty(username)) {
+			return Ut.jsHitoryBack("f-3", "이름를 입력해주세요");
 		}
-		if(userage==0) {
-			return ResultData.from("f-4", "나이를 입력해주세요"); 
+		if(Ut.empty(userage)) {
+			return Ut.jsHitoryBack("f-4", "나이를 입력해주세요"); 
 		}
-		if(userlocation==null) {
-			return ResultData.from("f-5", "지역를 입력해주세요"); 
+		if(Ut.empty(userlocation)) {
+			return Ut.jsHitoryBack("f-5", "ㅈ;약를 입력해주세요"); 
 		}
-		if(usergender==null) {
-			return ResultData.from("f-6", "성별를 입력해주세요"); 
+		if(Ut.empty(usergender)) {
+			return Ut.jsHitoryBack("f-6", "상뱔를 입력해주세요"); 
 		}
-		Rq rq = new Rq(req, resp, memberService);
 		memberService.join(userid, userpw, username, userage, userlocation, usergender);
 		
-		return ResultData.from("s-1", "가입에 성공하였습니다!");
+		return Ut.jsHitoryBack("S-1", "Id를 입력해주세요");
 	}
 		
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String userid, String userpw) {
-		if(userid.equals(null) || userid.trim().length()==0) {
+		if(Ut.empty(userid)) {
 			return Ut.jsHitoryBack("f-1", "Id를 입력해주세요");
 		}
 //		rq.print("Asdasd");
-		if(userpw==null || userid.trim().length()==0) {
+		if(Ut.empty(userpw)) {
 			return Ut.jsHitoryBack("f-1","Pw를 입력해주세요");
 		}
-		memberService.login(userid, userpw);
+		Member member = memberService.getMemberByuserId(userid);
 		
+		if(member == null) {
+			return Ut.jsHitoryBack("f-3", Ut.f("%s는 존재하지 않는 아이디입니다", userid));
+		}
+		if(userpw.equals(member.getUserpw())==false) {
+			return  Ut.jsHitoryBack("f-4",Ut.f("비밀번호가 일치하지 않습니다"));
+		}
+		
+		rq.login(member);
 		return Ut.jsHitoryBack("asd", "df");
 //		return Ut.jsReplace("S-1", "환영합니다", "/");
 	}
-	
+	@RequestMapping("/usr/member/doLogout")
+	public String doLogout() {
+		if(rq.isLogined()==false) {
+			return Ut.jsHitoryBack("f-1", "로그아웃 상태입니다");
+		}
+		rq.logout();
+		
+		return Ut.jsHitoryBack("s-1","안녕히가세요");
+	}
 	
 	@RequestMapping("/usr/member/practice")
 	@ResponseBody

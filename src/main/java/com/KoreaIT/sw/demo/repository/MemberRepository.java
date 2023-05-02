@@ -26,13 +26,6 @@ public interface MemberRepository  {
 			from `member`
 			where userid=#{userid}
 			""")
-	public void doLogin(String userid, String userpw);
-	
-	@Select("""
-			select *
-			from `member`
-			where userid=#{userid}
-			""")
 	Member getMemberByuserId(String userid);
 	
 	@Select("select * from a")
