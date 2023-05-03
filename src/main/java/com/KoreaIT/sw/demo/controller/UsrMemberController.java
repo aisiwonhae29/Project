@@ -40,14 +40,14 @@ public class UsrMemberController {
 			return Ut.jsHitoryBack("f-4", "나이를 입력해주세요"); 
 		}
 		if(Ut.empty(userlocation)) {
-			return Ut.jsHitoryBack("f-5", "ㅈ;약를 입력해주세요"); 
+			return Ut.jsHitoryBack("f-5", "지약를 입력해주세요"); 
 		}
 		if(Ut.empty(usergender)) {
 			return Ut.jsHitoryBack("f-6", "상뱔를 입력해주세요"); 
 		}
 		memberService.join(userid, userpw, username, userage, userlocation, usergender);
 		
-		return Ut.jsHitoryBack("S-1", "Id를 입력해주세요");
+		return Ut.jsHitoryBack("S-1", "회원가입에 성공하였습니다");
 	}
 		
 	@RequestMapping("/usr/member/doLogin")
@@ -97,8 +97,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/geta")
 	@ResponseBody
-	public String getPractice() {
-		return memberService.getPractice().toString();
+	public void getPracice() {
 	}
 	
 	@RequestMapping("/usr/member/login")

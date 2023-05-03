@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,13 +16,18 @@ import com.KoreaIT.sw.demo.vo.Rq;
 @Controller
 public class TestController {
 	@Autowired
+	MemberService m;
+	@Autowired
 	Rq rq;
 	//why make httpServlet independent varaible ??
 	HttpServletRequest req;
 	HttpServletResponse resp;
+	
 	MemberService memberService;
 	@RequestMapping("/usr/practice/practice")
-	public String practicehome() {
+	public String practicehome(Model model) {
+		Object a = m.getMemberById(1);;
+		model.addAttribute("v", a);
 		return "usr/practice/practice";
 	}
 	
@@ -41,6 +47,13 @@ public class TestController {
 	@ResponseBody
 	public String replaceexample(String lc) {
 		return Ut.jsReplace(lc, "/");
+	}
+	@RequestMapping("/usr/practice/ex")
+	@ResponseBody
+	public String showSomething(Model model) {
+		Object a = m.getMemberById(1);;
+		model.addAttribute("v", a);
+		return Ut.jsReplace("df","/");
 	}
 //despite no requestservlet, with postmethod controller can manage input data 
 //	@RequestMapping("/usr/practice/postexample")
