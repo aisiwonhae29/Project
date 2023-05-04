@@ -86,4 +86,8 @@ public class Rq {
 		
 		return currentUri;
 	}
+	public void initOnBeforeActionInterceptor() {
+		// TODO Auto-generated method stub
+		
+	}
 }
