@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MAIN" />
+<c:set var="pageTitle" value="join" />
 <%@ include file="../common/head.jspf"%>
 <div class="login_Box border mx-auto flex justify-center">
   <form action="../member/doJoin" method="POST">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MAIN" />
+<c:set var="pageTitle" value="login" />
 <%@ include file="../common/head.jspf"%>
 <div class="login_box flex flex-ai-c flex-column">
   <div class="login_box_title">Login</div>

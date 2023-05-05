@@ -1,30 +1,39 @@
 package com.KoreaIT.sw.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.KoreaIT.sw.demo.interceptor.BeforeActionInterceptor;
+import com.KoreaIT.sw.demo.interceptor.NeedLoginInterceptor;
+import com.KoreaIT.sw.demo.interceptor.NeedLogoutInterceptor;
 
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
-
-//	@Configuration
-//	public class MyWebMvcConfigurer implements WebMvcConfigurer {
-//		// BeforeActionInterceptor 불러오기
-//		@Autowired
-//		BeforeActionInterceptor beforeActionInterceptor;
-//
-//		// NeedLoginInterceptor 불러오기
-//		@Autowired
-//		NeedLoginInterceptor needLoginInterceptor;
-//
-//		// NeedLogoutInterceptor 불러오기
-//		@Autowired
-//		NeedLogoutInterceptor needLogoutInterceptor;
-//
-//		// /resource/common.css
-//		// 인터셉터 적용
-//		@Override
-//		public void addInterceptors(InterceptorRegistry registry) {
-//
+	//call BeforeActionInterceptor
+	@Autowired
+	BeforeActionInterceptor beforeActionInterceptor;
+	@Autowired
+	NeedLoginInterceptor needLoginInterceptor;
+	@Autowired
+	NeedLogoutInterceptor needLogoutInterceptor;
+	
+	// /resource/common.css
+	//apply Interceptor
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		InterceptorRegistration ir;
+		ir=registry.addInterceptor(beforeActionInterceptor);
+		ir.addPathPatterns("/**");
+		ir.addPathPatterns("/favicon.ico");
+//		ir=registry.addInterceptor(needLoginInterceptor);
+		
+//		ir.addPathPatterns("/usr/today/whopay");
+//		ir=registry.addInterceptor(needLogoutInterceptor);
+//		ir.addPathPatterns("/usr/member/login");
+	}
 //			InterceptorRegistration ir;
 //
 //			ir = registry.addInterceptor(beforeActionInterceptor);

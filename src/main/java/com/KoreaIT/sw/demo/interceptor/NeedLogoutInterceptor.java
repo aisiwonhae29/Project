@@ -14,6 +14,8 @@ public class NeedLogoutInterceptor implements HandlerInterceptor{
 	@Autowired
 	private Rq rq;
 	
+	//rq.isLogined() state session's loginedMemberId attribute is whether null or not. So if session is in logined state then 
+	//this method forbid access to something. LoginInterceptor is opposed with this. 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception{
 		if(rq.isLogined()) {
