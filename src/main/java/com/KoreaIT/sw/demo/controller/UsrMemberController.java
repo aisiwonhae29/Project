@@ -70,8 +70,8 @@ public class UsrMemberController {
 		}
 		
 		rq.login(member);
-		return Ut.jsHitoryBack("asd", "df");
-//		return Ut.jsReplace("S-1", "환영합니다", "/");
+//		return Ut.jsHitoryBack("asd", "df");
+		return Ut.jsReplace("S-1", "환영합니다", "/");
 	}
 	@RequestMapping("/usr/member/doLogout")
 	public String doLogout() {
@@ -108,6 +108,11 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/join")
 	public String showjoin() {
 		return "usr/member/join";
+	}
+	
+	@RequestMapping("/usr/member/mypage")
+	public String showMyPage() {
+		return "usr/member/mypage";
 	}
 	
 //	@Autowired
