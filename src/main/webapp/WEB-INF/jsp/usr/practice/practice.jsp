@@ -21,8 +21,22 @@
 	<div>1</div>
 </c:forEach>
 </div>
+
+<!-- AJAX Test -->
+<a href="../practice/whopaypr">AJAX test</a>
+
 <%@ include file="../common/foot.jspf"%>
 <!-- <form action="../practice/postexample" method="POST">
 <input type="text" name="id" />
 <input type="submit" />
 </form> -->
+<%-- <div><!-- ajax test -->
+$.ajax({
+	url : "/main/nuewsAjax.do",
+	type : "post",
+	dataType : "json",
+	data : Pparam : "${boardIDList} }", num: thisIndex},
+	traditional : true,
+	success : function(Result)
+})
+</div> --%>

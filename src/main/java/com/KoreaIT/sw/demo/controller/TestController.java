@@ -55,6 +55,10 @@ public class TestController {
 		model.addAttribute("v", a);
 		return Ut.jsReplace("df","/");
 	}
+	@RequestMapping("/usr/practice/whopaypr")
+	public String whopaypr() {
+		return "usr/practice/whopaypr";
+	}
 //despite no requestservlet, with postmethod controller can manage input data 
 //	@RequestMapping("/usr/practice/postexample")
 //	@ResponseBody
