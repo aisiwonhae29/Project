@@ -1,90 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="pageTitle" value="who pay?"/>
-<%@ include file="../common/head.jspf" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="pageTitle" value="who pay?" />
+<%@ include file="../common/head.jspf"%>
 <hr />
+
+<div class="flex">
+		<button id="down"><<</button>
+
+		<input id="num" type="text" value="1" name="number" />
+		<button id="up">>></button>
+</div>
+<div>
+		<button id="submit" type="submit">확인</button>
+</div>
+<div>
+		<button id="red">asdsad</button>
+</div>
+<div id="content"></div>
+<script>
+	$(document).ready(
+			function() {
+				$("#submit").click(
+						function() {
+							if (parseInt($('#num').val()) < 2
+									|| parseInt($('#num').val()) > 8) {
+								alert('두명에서 여덜명까지 적어주세요..');
+								return false;
+							}
+							$.ajax({
+								url : '/usr/today/whopaynum',
+								type : 'GET',
+								data : {
+									number : $('#num').val()
+								},
+								contentType : 'text/html; charset=utf-8',
+								success : function(v) {
+									$('#content').html(v);
+								}
+							});
+						});
+				$('#down').click(function() {
+					$('#num').val(parseInt($('#num').val()) - 1);
+				});
+			});
+
+	$(document).ready(function() {
+		$('#up').click(function() {
+			$('#num').val(parseInt($('#num').val()) + 1);
+		});
+		$('#red').click(function() {
+			$('#1').css('background-color', 'red');
+		})
+	})
+	var random =Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
 	
-	<div>
-		<div> < </div>
-		<form action="">
+</script>
+
+<%@ include file="../common/foot.jspf"%>
+<!-- </script>
+	<div class="flex">
+		<button id="down"> << </button>
 		
-		<c:set var="a" value="1"/>
-		<input type="text" value="${a} " />
-		<c:if test="true">
-		
-		</c:if>
+		<form action="" method="POST" onsubmit="return numchk(this)" >
+		<input id="num" type="text" value="1" name="number"/>
+		<button type="submit" >확인</button>
 		</form>
 		
-		<div>></div>
+		<button id="up">>></button>
 	</div>
 	
-	<div>
-	<table>
-		<colgroup>
-		
-		</colgroup>
-		<thead>
-		
-		</thead>
-		<tbody>
-			
-		</tbody>
-	</table>
-	</div>
-	
-	<section>
-	<table>
-  <thead>
-    <th>Inputs</th>
-    <th>HTML Out</th>
-    <th>Value Out</th>
-  </thead>
-  
-  
-  <tr>
-    <td>
-      <input id="name" 
-             onkeyup="myFunction(this.id,this.value)"
-      />
-    </td>
-    <td id="txtname">
-    </td>
-    <td>
-      <input id="inname" />
-    </td>
-  </tr>
-  <script>
-  var a=5;
-  </script>
-  
-  <c:forEach var="i" begin="1" end="${a }">
-  sdfsdf
-  
-  </c:forEach>
-  
-  <tr>
-    <td>
-      <input id="lastname" 
-             onkeyup="myFunction(this.id,this.value)"
-      />
-    </td>
-    <td class="t" id="txtlastname">
-    </td>
-    <td>
-      <input id="inlastname" />
-    </td>
-  </tr>
-</table>
-
-
-	
-	</section>
-	
-	<script>
-	function myFunction(A,B) {
-		  var syncValue = B;
-		  document.getElementById("txt"+A).innerHTML = syncValue;
-		  document.getElementById("in"+A).value = syncValue;
-		}
-	</script>
-<%@ include file="../common/foot.jspf" %>
+<script> -->

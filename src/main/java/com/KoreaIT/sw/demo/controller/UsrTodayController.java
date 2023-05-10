@@ -1,6 +1,7 @@
 package com.KoreaIT.sw.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,5 +17,11 @@ public class UsrTodayController {
 	@RequestMapping("/usr/today/whopay")
 	public  String whopay() {
 		return "usr/whopay/whopay";
+	}
+	
+	@RequestMapping("/usr/today/whopaynum")
+	public String whopaynum(String number, Model model) {
+		model.addAttribute("num", number);
+		return "usr/whopay/whopaynum";
 	}
 }
