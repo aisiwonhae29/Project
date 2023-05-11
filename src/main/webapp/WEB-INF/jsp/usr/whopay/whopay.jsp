@@ -43,19 +43,25 @@
 					$('#num').val(parseInt($('#num').val()) - 1);
 				});
 			});
-
 	$(document).ready(function() {
+		var random =Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
 		$('#up').click(function() {
 			$('#num').val(parseInt($('#num').val()) + 1);
 		});
 		$('#red').click(function() {
-			$('#1').css('background-color', 'red');
+			while(random.length>0){
+				random.pop();
+				$('#1').css('background-color', 'red');
+				wait(1000);
+				$('#1').css('background-color', 'white');
+			}
+			
 		})
 	})
-	var random =Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
-	
+/*                 const box = document.createElement("div");
+                $("div").text("Asdasd");
+                document.body.appendChild(box); */
 </script>
-
 <%@ include file="../common/foot.jspf"%>
 <!-- </script>
 	<div class="flex">
