@@ -19,7 +19,10 @@
 </div>
 <div id="content"></div>
 <div id="confirm"></div>
+<div id="choice"></div>
+<a href="../"></a>
 <script>
+	var eatmember=[];
 	$(document).ready(
 			function() {
 				$("#submit").click(
@@ -46,9 +49,9 @@
 				});
 			});
 	$(document).ready(function() {
-		var random =Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
+		var random =Array.from(Array( 20 + Math.floor(Math.random() * 35)).keys());
+		var choice =Math.floor(Math.random()*8);
 		$('#retry').click(function(){
-			random=Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
 			$('#1').css('background-color','red');
 		})
 		$('#up').click(function() {
@@ -61,20 +64,26 @@
 				setTimeout(function(){
 					
 				setTimeout(function() {
+					if(random.length==parseInt(choice)){
+						return;
+					}
 					$("#"+(random.length%parseInt($('#num').val())+1)).css('background-color','white');	
 				}, 50);
 				$('#confirm').html(random.length);
 					setTimeout(function() {
-						if(random.length>0){
+						if(random.length>parseInt(choice)){
 							loop();
 						}
 					}, 50);
 				},50)
+				/* $('#'+choice%parseInt($('#num').val()).css('background-color','gold'); */
+				/* $('#1').css('background-color','gold'); */
 		})	
 	})
 /*                 const box = document.createElement("div");
                 $("div").text("Asdasd");
                 document.body.appendChild(box); */
+    
 </script>
 <%@ include file="../common/foot.jspf"%>
 <!-- </script>

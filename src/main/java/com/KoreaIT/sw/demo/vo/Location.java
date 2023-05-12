@@ -9,9 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class Location {
 	private int id;
-	private String userId;
-	private String userPw;
-	private String userLocation;
-	private String userGender;
-	private int userAge;
+	private String location;
 }

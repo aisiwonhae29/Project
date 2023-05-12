@@ -43,7 +43,7 @@ header {
   <ol class="flex justify-around text-1xl">
     <li class="hover:underline"><a href="#">뭐가 맛있지?</a></li>
     <li class="hover:underline"><a href="/usr/today/whopay">누가낼까?</a></li>
-    <li class="hover:underline"><a href="#">어디갈까?</a></li>
+    <li class="hover:underline"><a href="/usr/today/where">어디갈까?</a></li>
     <li class="hover:underline"><a href="/usr/member/mypage">내 페이지</a></li>
     <li class="hover:underline"><a href="/usr/practice/practice ">PMP</a></li>
   </ol>

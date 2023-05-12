@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class menu {
+public class eat {
 	private int id;
-	private String menuname;
-	
+	private String date;
+	private String location;
+	private String menu;
+	private String usergender;
+	private int userage;
 }

@@ -19,9 +19,20 @@ public class UsrTodayController {
 		return "usr/whopay/whopay";
 	}
 	
+	@RequestMapping("/usr/today/doEat")
+	public String doEat() {
+		
+		return "usr/whopay/~!~!";
+	}
+	
 	@RequestMapping("/usr/today/whopaynum")
 	public String whopaynum(String number, Model model) {
 		model.addAttribute("num", number);
 		return "usr/whopay/whopaynum";
+	}
+	
+	@RequestMapping("/usr/today/where")
+	public String where() {
+		return "usr/menuselec/menuselec";
 	}
 }
