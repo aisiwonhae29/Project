@@ -11,6 +11,7 @@ import com.KoreaIT.sw.demo.interceptor.NeedLoginInterceptor;
 import com.KoreaIT.sw.demo.interceptor.NeedLogoutInterceptor;
 
 @Configuration
+/* @EnableWebMvc */
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	//call BeforeActionInterceptor
 	@Autowired
@@ -34,6 +35,13 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 //		ir=registry.addInterceptor(needLogoutInterceptor);
 //		ir.addPathPatterns("/usr/member/login");
 	}
+	
+	/*
+	 * @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	 * 
+	 * }
+	 */
+	 
 //			InterceptorRegistration ir;
 //
 //			ir = registry.addInterceptor(beforeActionInterceptor);

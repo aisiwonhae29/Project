@@ -24,7 +24,9 @@
 
 <!-- AJAX Test -->
 <a href="../practice/whopaypr">AJAX test</a>
-
+<img src="/images/gora.png" alt="Your Image">
+<img src="${pageContext.request.contextPath}/static/gora.png" alt="Your Image">
+<img src="${pageContext.request.contextPath}/static/${java.net.URLEncoder.encode('gora.png', 'UTF-8')}" alt="Your Image">
 <%@ include file="../common/foot.jspf"%>
 <!-- <form action="../practice/postexample" method="POST">
 <input type="text" name="id" />

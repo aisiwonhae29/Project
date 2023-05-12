@@ -12,11 +12,13 @@
 </div>
 <div>
 		<button id="submit" type="submit">확인</button>
+		<button id="retry">다시</button>
 </div>
 <div>
 		<button id="red">asdsad</button>
 </div>
 <div id="content"></div>
+<div id="confirm"></div>
 <script>
 	$(document).ready(
 			function() {
@@ -45,18 +47,30 @@
 			});
 	$(document).ready(function() {
 		var random =Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
+		$('#retry').click(function(){
+			random=Array.from(Array( 10 + Math.floor(Math.random() * 35)).keys());
+			$('#1').css('background-color','red');
+		})
 		$('#up').click(function() {
 			$('#num').val(parseInt($('#num').val()) + 1);
 		});
-		$('#red').click(function() {
-			while(random.length>0){
+		$('#red').click(function loop(){
+
 				random.pop();
-				$('#1').css('background-color', 'red');
-				wait(1000);
-				$('#1').css('background-color', 'white');
-			}
-			
-		})
+				$("#"+(random.length%parseInt($('#num').val())+1)).css('background-color','red');
+				setTimeout(function(){
+					
+				setTimeout(function() {
+					$("#"+(random.length%parseInt($('#num').val())+1)).css('background-color','white');	
+				}, 50);
+				$('#confirm').html(random.length);
+					setTimeout(function() {
+						if(random.length>0){
+							loop();
+						}
+					}, 50);
+				},50)
+		})	
 	})
 /*                 const box = document.createElement("div");
                 $("div").text("Asdasd");
@@ -76,3 +90,8 @@
 	</div>
 	
 <script> -->
+<!-- /* 			random.pop();
+			$('#1').css('background-color','red');
+			setTimeout(function() {
+				$('#1').css('background-color','gold');	
+			}, 1000); */ -->
