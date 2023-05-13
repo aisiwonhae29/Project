@@ -6,17 +6,33 @@
 <c:forEach begin="1" end ="${num }" var="i">
 	<div >
 	<div id="<c:out value = "${i}"/>">as</div>
-	<form action="">
-		<div><input type="hidden" value="${i}" name="id" /></div>
-		<div><input type="text" value="" name="date" /></div>
-		<div><input type="text" value=" " name="location" /></div>
-		<div><input type="text" value=" " name="menu" /></div>
-		<div><input type="text" value="man" name="gender" /></div>
-		<div><input type="text" value="33" name="age" /></div>
+	<!-- <form onsubmit="confirmclick; return false;"> -->
+		<div><input class="${i}" type="hidden" value="${i}" name="id" /></div>
+		<div><input class="${i}" type="text" value="23/05/13" name="date" /></div>
+		<div><input class="${i}" type="text" value="월평동" name="location" /></div>
+		<div><input class="${i}" type="text" value="제육볶음" name="menu" /></div>
+		<div><input class="${i}" type="text" value="man" name="gender" /></div>
+		<div><input class="${i}" type="text" value="33" name="age" /></div>
 		<script>
-	
+		
+		$(document).ready(
+				function(){
+				 $('#confirmData').click(function(){
+					var array=[];
+					$('.'+${i}).each(function(){
+						var key=$(this).attr('name');
+						var value=$(this).val().trim();
+						var map={};
+						map[key]=value;
+						array.push(map);
+						
+					 });
+					eatmember.push(array);
+					 }) 
+				
+				})
 		</script>
-	</form>
+	<!-- </form> -->
 	</div>
 </c:forEach>
 </section>

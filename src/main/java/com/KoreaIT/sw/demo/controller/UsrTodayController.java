@@ -1,5 +1,8 @@
 package com.KoreaIT.sw.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +23,8 @@ public class UsrTodayController {
 	}
 	
 	@RequestMapping("/usr/today/doEat")
-	public String doEat() {
+	@ResponseBody
+	public String doEat(ArrayList<Map<String, Object>> eatmember) {
 		
 		return "usr/whopay/~!~!";
 	}

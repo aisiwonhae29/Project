@@ -15,16 +15,24 @@
 		<button id="retry">다시</button>
 </div>
 <div>
-		<button id="red">asdsad</button>
+	<button id="confirmData">보내기</button>
 </div>
 <div id="content"></div>
 <div id="confirm"></div>
 <div id="choice"></div>
+
+		<button id="start">돌려돌려돌림판~</button>
 <a href="../"></a>
 <script>
 	var eatmember=[];
+	var random=[]
 	$(document).ready(
 			function() {
+				$('retry').click(
+						function(){
+							
+				})
+						
 				$("#submit").click(
 						function() {
 							if (parseInt($('#num').val()) < 2
@@ -49,7 +57,7 @@
 				});
 			});
 	$(document).ready(function() {
-		var random =Array.from(Array( 20 + Math.floor(Math.random() * 35)).keys());
+		random =Array.from(Array( 20 + Math.floor(Math.random() * 35)).keys());
 		var choice =Math.floor(Math.random()*8);
 		$('#retry').click(function(){
 			$('#1').css('background-color','red');
@@ -57,7 +65,17 @@
 		$('#up').click(function() {
 			$('#num').val(parseInt($('#num').val()) + 1);
 		});
-		$('#red').click(function loop(){
+		$('#start').click(function(){
+	 	$.ajax({
+			url : '/usr/today/doEat',
+			type : 'POST',
+			data:JSON.stringify(eatmember),
+			contentType : 'application/json',
+			success: function(response) {console.log(response);},
+			error: function(error) {console.error(error);}
+		}) 
+		})
+		$('#start').click(function loop(){
 
 				random.pop();
 				$("#"+(random.length%parseInt($('#num').val())+1)).css('background-color','red');
