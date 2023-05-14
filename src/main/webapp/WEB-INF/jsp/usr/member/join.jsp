@@ -3,7 +3,7 @@
 <c:set var="pageTitle" value="join" />
 <%@ include file="../common/head.jspf"%>
 <div class="login_Box border mx-auto flex justify-center">
-  <form action="../member/doJoin" method="POST">
+  <form action="../member/doJoin" method="POST" onsubmit='check(this); return false;'>
     <ol class="h-full flex flex-col items-center justify-around">
       <li>
         <div class="inputName">ID</div>
@@ -33,6 +33,35 @@
     <div><button type="submit">버튼</button></div>
   </form>
 </div>
+<script>
+function check(form){
+	if(form.userid.value.trim()==0){
+		alert('id를 입력해주세요');
+		return;
+	}
+	if(form.userpw.value.trim()==0){
+		alert('비밀번호를 입력해주세요');
+		return;
+	}
+	if(form.username.value.trim()==0){
+		alert('이름를 입력해주세요');
+		return;
+	}
+	if(form.userage.value.trim()==0){
+		alert('나이를 입력해주세요');
+		return;
+	}
+	if(form.userlocation.value.trim()==0){
+		alert('지역을 입력해주세요');
+		return;
+	}
+	if(form.usergender.value.trim()!="남"&&form.usergender.value.trim()!="여"){
+		alert('남/여 중 하나를 입력해주세요')
+		return;
+	}
+	form.submit();
+}
+</script>
 <style>
 .inputName {
   display: inline-block;
