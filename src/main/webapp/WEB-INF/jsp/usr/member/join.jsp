@@ -7,7 +7,8 @@
     <ol class="h-full flex flex-col items-center justify-around">
       <li>
         <div class="inputName">ID</div>
-        <input class="w-56 border-b-2 border-red-600" type="text" name="userid">
+        <input class="w-56 border-b-2 border-red-600" type="text" name="userid" onblur="dupCheck()">
+        <div id="dupCheck-msg"></div>	
       </li>
       <li>
         <div class="inputName">PW</div>
@@ -60,6 +61,18 @@ function check(form){
 		return;
 	}
 	form.submit();
+}
+
+function dupCheck(){
+	  $.ajax({
+          type: "POST",
+          url: "../member/getLoginIdDup",
+          data: {loginId : $(".input").attr('value')},
+          dataType: "dataType",
+          success: function (response) {
+              alert('asd');
+          }
+      });
 }
 </script>
 <style>

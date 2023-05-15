@@ -15,8 +15,16 @@ public interface MemberRepository  {
 	@Select("select * from `member` where id=#{loginedMemberId}")
 	public Member getMemberById(int loginedMemberId); 
 
-	@Select("insert into `member` set ")
-	public String doJoin();
+	@Insert("""
+			INSERT INTO `member` SET
+			userid = #{userid}, 
+			userpw = #{userpw}, 
+			username = #{username}, 
+			userlocation = #{userlocation}, 
+			userage = #{userage}, 
+			usergender = #{usergender}			
+			""")
+	public void doJoin(String userid, String userpw, String username, String userlocation, int userage, String usergender);
 	
 	@Insert("insert into a set `name`=#{name}")
 	public void practice(String name);

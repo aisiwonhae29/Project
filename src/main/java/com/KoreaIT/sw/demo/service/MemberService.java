@@ -18,9 +18,9 @@ public class MemberService {
 	}
 	
 	public String join(String userid, String userpw, String username, int userage, String userlocation, String usergender) {
-		Member existmember = getMemberByuserId(userid);
+		/* Member existmember = getMemberByuserId(userid); */
 		
-		memberRepository.doJoin();
+		memberRepository.doJoin(userid, userpw, username, userlocation, userage, usergender);
 		return Ut.jsHitoryBack("S-1", "회원가입에 성공하였습니다");
 	}
 //	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,

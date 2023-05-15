@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.MemberService;
@@ -24,27 +25,33 @@ public class UsrMemberController {
 	@Autowired
 	private Rq rq;
 	
+	@RequestMapping("/usr/member/getLoginIdDup")
+	@ResponseBody
+	public ResultData getLoginDup(String loginId) {
+		
+		if(Ut.empty(loginId)) {
+			return ResultData.from("F-1", "아이디를 입력해주세요");
+		}
+		Member existsMember = memberService.getMemberByuserId(loginId);
+		
+		if(existsMember != null) {
+			return ResultData.from("F-2" , "해당 아이디는 사용중입니다", "loginId", loginId);
+		}
+		
+		return ResultData.from("S-1","사용 가능!", "loginId", loginId);
+	}
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String userid, String userpw, String username, int userage, String userlocation, String usergender) {;
-		if(Ut.empty(userid) ) {
-			return Ut.jsHitoryBack("f-1", "Id를 입력해주세요");
-		}
-		if(Ut.empty(userpw)) {
-			return Ut.jsHitoryBack("f-2", "PW를 입력해주세요");
-		}
-		if(Ut.empty(username)) {
-			return Ut.jsHitoryBack("f-3", "이름를 입력해주세요");
-		}
-		if(Ut.empty(userage)) {
-			return Ut.jsHitoryBack("f-4", "나이를 입력해주세요"); 
-		}
-		if(Ut.empty(userlocation)) {
-			return Ut.jsHitoryBack("f-5", "지약를 입력해주세요"); 
-		}
-		if(Ut.empty(usergender)) {
-			return Ut.jsHitoryBack("f-6", "상뱔를 입력해주세요"); 
-		}
+	public String doJoin(String userid, String userpw, String username,  @RequestParam("userage") int userage, String userlocation, String usergender) {
+		/*
+		 * if(Ut.empty(userid) ) { return Ut.jsHitoryBack("f-1", "Id를 입력해주세요"); }
+		 * if(Ut.empty(userpw)) { return Ut.jsHitoryBack("f-2", "PW를 입력해주세요"); }
+		 * if(Ut.empty(username)) { return Ut.jsHitoryBack("f-3", "이름를 입력해주세요"); }
+		 * if(Ut.empty(userage)) { return Ut.jsHitoryBack("f-4", "나이를 입력해주세요"); }
+		 * if(Ut.empty(userlocation)) { return Ut.jsHitoryBack("f-5", "지약를 입력해주세요"); }
+		 * if(Ut.empty(usergender)) { return Ut.jsHitoryBack("f-6", "상뱔를 입력해주세요"); }
+		 */
 		memberService.join(userid, userpw, username, userage, userlocation, usergender);
 		
 		return Ut.jsHitoryBack("S-1", "회원가입에 성공하였습니다");
