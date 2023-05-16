@@ -1,13 +1,11 @@
 package com.KoreaIT.sw.demo.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.KoreaIT.sw.demo.repository.MemberRepository;
 import com.KoreaIT.sw.demo.util.Ut;
 import com.KoreaIT.sw.demo.vo.Member;
-import com.KoreaIT.sw.demo.vo.a;
+import com.KoreaIT.sw.demo.vo.ResultData;
 
 @Service
 public class MemberService {
@@ -17,11 +15,12 @@ public class MemberService {
 		this.memberRepository = memberRepository;
 	}
 	
-	public String join(String userid, String userpw, String username, int userage, String userlocation, String usergender) {
+	public ResultData join(String userid, String userpw, String username, int userage, String userlocation, String usergender, String useremail) {
 		/* Member existmember = getMemberByuserId(userid); */
 		
-		memberRepository.doJoin(userid, userpw, username, userlocation, userage, usergender);
-		return Ut.jsHitoryBack("S-1", "회원가입에 성공하였습니다");
+		memberRepository.doJoin(userid, userpw, username, userlocation, userage, usergender, useremail);
+		int id=memberRepository.getLastInsertId();
+		return ResultData.from("S-1", "회원가입이 완료되었습니다!","id", id);
 	}
 //	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 //			String email) {
@@ -54,7 +53,10 @@ public class MemberService {
 		Member member = memberRepository.getMemberByuserId(userid);
 		return member;
 	}
-
+	public Member getMemberByEmail(String useremail) {
+		return memberRepository.getMemberByuseremail(useremail);
+	}
+	
 	public Member getMemberById(int loginedMemberId) {
 		return memberRepository.getMemberById(loginedMemberId);
 	}

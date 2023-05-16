@@ -22,9 +22,10 @@ public interface MemberRepository  {
 			username = #{username}, 
 			userlocation = #{userlocation}, 
 			userage = #{userage}, 
-			usergender = #{usergender}			
+			usergender = #{usergender},	
+			useremail=#{useremail}		
 			""")
-	public void doJoin(String userid, String userpw, String username, String userlocation, int userage, String usergender);
+	public void doJoin(String userid, String userpw, String username, String userlocation, int userage, String usergender, String useremail);
 	
 	@Insert("insert into a set `name`=#{name}")
 	public void practice(String name);
@@ -39,4 +40,16 @@ public interface MemberRepository  {
 	@Select("select * from a")
 	List<a> getPractice();
 	//List generics type make list form and it can setting in properties mybatis : type-aliases-package : class "url"
+
+	@Select("""
+			SELECT LAST_INSERT_ID()
+			""")
+	public int getLastInsertId();
+	
+	@Select("""
+			select *
+			from `member`
+			where useremail=#{useremail}
+			""")
+	public Member getMemberByuseremail(String useremail);
 }

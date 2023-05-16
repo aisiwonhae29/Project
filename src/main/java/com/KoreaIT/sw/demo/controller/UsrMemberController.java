@@ -29,21 +29,29 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData getLoginDup(String loginId) {
 		
-		if(Ut.empty(loginId)) {
-			return ResultData.from("F-1", "아이디를 입력해주세요");
-		}
-		Member existsMember = memberService.getMemberByuserId(loginId);
+		 if(Ut.empty(loginId)) { return ResultData.from("F-1", "아이디를 입력해주세요"); }
+		 Member existsMember = memberService.getMemberByuserId(loginId);
+	 
+		 if(existsMember != null) { return ResultData.from("F-2" , "해당 아이디는 사용중입니다",
+		  "loginId", loginId); }
 		
-		if(existsMember != null) {
-			return ResultData.from("F-2" , "해당 아이디는 사용중입니다", "loginId", loginId);
-		}
-		
-		return ResultData.from("S-1","사용 가능!", "loginId", loginId);
+		 return ResultData.from("S-1","사용 가능!", "loginId", loginId);
 	}
-	
+	@RequestMapping("/usr/member/getemailDup")
+	@ResponseBody
+	public ResultData getemailDup(String useremail) {
+		
+		 if(Ut.empty(useremail)) { return ResultData.from("F-1", "이메일을 입력해주세요"); }
+		 Member existsMember = memberService.getMemberByEmail(useremail);
+	 
+		 if(existsMember != null) { return ResultData.from("F-2" , "해당 이메일은 사용중입니다",
+		  "useremail", useremail); }
+		
+		 return ResultData.from("S-1","사용 가능!", "useremail", useremail);
+	}
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String userid, String userpw, String username,  @RequestParam("userage") int userage, String userlocation, String usergender) {
+	public String doJoin(String userid, String userpw, String username,  @RequestParam("userage") int userage, String userlocation, String usergender, String useremail) {
 		/*
 		 * if(Ut.empty(userid) ) { return Ut.jsHitoryBack("f-1", "Id를 입력해주세요"); }
 		 * if(Ut.empty(userpw)) { return Ut.jsHitoryBack("f-2", "PW를 입력해주세요"); }
@@ -52,7 +60,7 @@ public class UsrMemberController {
 		 * if(Ut.empty(userlocation)) { return Ut.jsHitoryBack("f-5", "지약를 입력해주세요"); }
 		 * if(Ut.empty(usergender)) { return Ut.jsHitoryBack("f-6", "상뱔를 입력해주세요"); }
 		 */
-		memberService.join(userid, userpw, username, userage, userlocation, usergender);
+		ResultData joinRd = memberService.join(userid, userpw, username, userage, userlocation, usergender, useremail);
 		
 		return Ut.jsHitoryBack("S-1", "회원가입에 성공하였습니다");
 	}
