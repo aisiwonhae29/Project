@@ -6,11 +6,14 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TodayRepository {
 	@Insert("""
-				INSERT INTO eat
-				SET 
+				INSERT INTO eat SET 
+				date = #{date},
+				location = #{location}, 
+				menu = #{menu}, 
+				usergendser = #{usergender},
+				userage = #{userage}
 			""")
-	void writeMenu(int id, String date, String location, String menu,
-			String usergendser, int userage);
+	void writeMenu(String date, String location, String menu, String usergendser, int userage);
 	
 	
 }

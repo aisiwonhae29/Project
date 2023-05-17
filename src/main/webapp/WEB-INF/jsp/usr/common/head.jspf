@@ -16,17 +16,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
 <link rel="stylesheet" href="/resource/common.css" />
-<script src="/resource/common.js" defer="defer">
+<!-- <script src="/resource/common.js"></script> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
-	@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-
-</script>
 <style>
+	@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 header {
-  		font-family: "Hi Melody", cursive;
-	}
+src :  url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+		  		font-family: "Hi Melody", cursive;
+			}
+
 </style>
 </head>
 <body>
@@ -38,13 +38,13 @@ header {
 	</section>
 
 <header>
-<div class="w-9/12 mx-auto mt-19">
+<div id="topbar" class="w-9/12 mx-auto mt-19">
   <ol class="flex justify-around text-1xl">
-    <li class="hover:underline"><a href="#">뭐가 맛있지?</a></li>
-    <li class="hover:underline"><a href="/usr/today/whopay">누가낼까?</a></li>
-    <li class="hover:underline"><a href="/usr/today/where">어디갈까?</a></li>
+    <li><a href="#">뭐가 맛있지?</a></li>
+    <li><a href="/usr/today/whopay">누가낼까?</a></li>
+    <li><a href="/usr/today/where">어디갈까?</a></li>
     <!-- <li class="hover:underline"><a href="/usr/member/mypage">내 페이지</a></li> -->
-    <li class="hover:underline"><a href="/usr/practice/practice ">PMP</a></li>
+    <li><a href="/usr/practice/practice ">PMP</a></li>
   </ol>
   <ul class="text-right">
   	<c:if test="${!rq.logined }">

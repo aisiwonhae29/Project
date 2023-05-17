@@ -10,18 +10,22 @@
         <input class="w-56 border-b-2 border-red-600" type="text" name="userid" onblur="iddupCheck()">
         <div id="dupCheck-msg"></div>
         <style>
-        #idbox{position: relative;}
-        #dupCheck-msg{position: absolute; top: 100%; left: 55px;}
+        	#idbox{position: relative;}
+        	#dupCheck-msg{position: absolute; top: 100%; left: 55px;}
         </style>
       </li>
       <li>
         <div class="inputName">PW</div>
         <input class="w-56 border-b-2 border-red-600" type="text" name="userpw">
       </li>
-       <li>
+       <li id="emailbox">
         <div class="inputName">이메일</div>
         <input class="w-56 border-b-2 border-red-600" type="text" name="useremail" onblur="emaildupCheck()">
          <div id="emaildupCheck-msg"></div>
+         <style>
+       		 #emailbox{position: relative;}
+       		 #emaildupCheck-msg{position: absolute; top: 100%; left: 55px;}
+        </style>
       </li>
       <li>
         <div class="inputName">이름</div>

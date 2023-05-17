@@ -14,5 +14,6 @@ public class Member {
 	private String username; //added at 5/5
 	private String userlocation;
 	private String usergender;
+	private String useremail;
 	private int userage;
 }

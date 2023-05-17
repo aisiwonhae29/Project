@@ -11,8 +11,13 @@
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
 			level: 3
 		};
-
+		
 		var map = new kakao.maps.Map(container, options);
+
+		curl -v -X GET "https://dapi.kakao.com/v2/local/search/address.json" \
+		  -H "Authorization: KakaoAK ${REST_API_KEY}" \
+		  --data-urlencode "query=전북 삼성동 100" 
+		
 	</script>
 
 <%@ include file="../common/foot.jspf" %>

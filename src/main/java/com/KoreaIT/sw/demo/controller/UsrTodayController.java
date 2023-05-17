@@ -24,8 +24,12 @@ public class UsrTodayController {
 	
 	@RequestMapping("/usr/today/doEat")
 	@ResponseBody
-	public String doEat(ArrayList<Map<String, Object>> eatmember) {
-		
+	public String doEat(ArrayList<Map<String, Object>> eatmembers) {
+		String date;
+		String location;
+		String menu;
+		String usergender;
+		int userage;
 		return "usr/whopay/~!~!";
 	}
 	
