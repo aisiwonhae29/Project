@@ -29,26 +29,17 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir=registry.addInterceptor(beforeActionInterceptor);
 		ir.addPathPatterns("/**");
 		ir.addPathPatterns("/favicon.ico");
-//		ir=registry.addInterceptor(needLoginInterceptor);
-		
-//		ir.addPathPatterns("/usr/today/whopay");
-//		ir=registry.addInterceptor(needLogoutInterceptor);
-//		ir.addPathPatterns("/usr/member/login");
+		ir=registry.addInterceptor(needLoginInterceptor);
+		ir.addPathPatterns("/usr/member/doLogout");
+		ir.addPathPatterns("/usr/today/whopay");
+		ir=registry.addInterceptor(needLogoutInterceptor);
+		ir.addPathPatterns("/usr/member/login");
+		ir.addPathPatterns("/usr/member/join");
+		ir.addPathPatterns("/usr/member/doJoin");
+		ir.addPathPatterns("/usr/member/doLogin");
 	}
 	
-	/*
-	 * @Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	 * 
-	 * }
-	 */
-	 
-//			InterceptorRegistration ir;
-//
-//			ir = registry.addInterceptor(beforeActionInterceptor);
-//			ir.addPathPatterns("/**");
-//			ir.addPathPatterns("/favicon.ico");
-//			ir.excludePathPatterns("/resource/**");
-//			ir.excludePathPatterns("/error");
+
 //
 //			ir = registry.addInterceptor(needLoginInterceptor);
 //			ir.addPathPatterns("/usr/article/write");

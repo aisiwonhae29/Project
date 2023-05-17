@@ -2,6 +2,7 @@ package com.KoreaIT.sw.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,7 @@ public class UsrMemberController {
 	}
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String userid, String userpw, String username,  @RequestParam("userage") int userage, String userlocation, String usergender, String useremail) {
+	public String doJoin(@RequestParam(defaultValue = "/") String afterLoginUri, String userid, String userpw, String username,  @RequestParam("userage") int userage, String userlocation, String usergender, String useremail) {
 		/*
 		 * if(Ut.empty(userid) ) { return Ut.jsHitoryBack("f-1", "Id를 입력해주세요"); }
 		 * if(Ut.empty(userpw)) { return Ut.jsHitoryBack("f-2", "PW를 입력해주세요"); }
@@ -60,14 +61,26 @@ public class UsrMemberController {
 		 * if(Ut.empty(userlocation)) { return Ut.jsHitoryBack("f-5", "지약를 입력해주세요"); }
 		 * if(Ut.empty(usergender)) { return Ut.jsHitoryBack("f-6", "상뱔를 입력해주세요"); }
 		 */
-		ResultData joinRd = memberService.join(userid, userpw, username, userage, userlocation, usergender, useremail);
+		ResultData<Integer> joinRd = memberService.join(userid, userpw, username, userage, userlocation, usergender, useremail);
 		
-		return Ut.jsHitoryBack("S-1", "회원가입에 성공하였습니다");
+		if(joinRd.isFail()) {
+			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
+		}
+		Member member = memberService.getMemberById(joinRd.getData1());
+		
+		String afterJoinUri = "../member/login?afterLoginUri="+Ut.getEncodedCurrentUri(afterLoginUri);
+		
+		return Ut.jsReplace("S-1", Ut.f("회원가입이 완료되었습니다"), afterJoinUri);
 	}
 		
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String userid, String userpw) {
+	public String doLogin(String userid, String userpw,  @RequestParam(defaultValue = "/") String afterLoginUri) {
+		
+		if(rq.isLogined()) {
+			return Ut.jsHitoryBack("F-5", "이미 로그인 상태입니다");
+		}
+		
 		if(Ut.empty(userid)) {
 			return Ut.jsHitoryBack("f-1", "Id를 입력해주세요");
 		}
@@ -86,16 +99,15 @@ public class UsrMemberController {
 		
 		rq.login(member);
 //		return Ut.jsHitoryBack("asd", "df");
-		return Ut.jsReplace("S-1", "환영합니다", "/");
+		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getUsername()), afterLoginUri);
 	}
 	@RequestMapping("/usr/member/doLogout")
-	public String doLogout() {
-		if(rq.isLogined()==false) {
-			return Ut.jsHitoryBack("f-1", "로그아웃 상태입니다");
-		}
+	@ResponseBody
+	public String doLogout(@RequestParam(defaultValue="/") String afterLogoutUri) {
+		afterLogoutUri="login";
 		rq.logout();
 		
-		return Ut.jsHitoryBack("s-1","안녕히가세요");
+		return Ut.jsReplace("s-1","안녕히가세요", afterLogoutUri);
 	}
 	
 	@RequestMapping("/usr/member/practice")
@@ -116,7 +128,7 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/login")
-	public String showLogin() {
+	public String showLogin(HttpSession httpSession) {
 		return "usr/member/login";
 	}
 	
