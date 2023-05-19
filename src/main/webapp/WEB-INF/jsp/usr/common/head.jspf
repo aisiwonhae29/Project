@@ -43,7 +43,7 @@ src :  url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
     <li><a href="#">뭐가 맛있지?</a></li>
     <li><a href="/usr/today/whopay">누가낼까?</a></li>
     <li><a href="/usr/today/where">어디갈까?</a></li>
-    <!-- <li class="hover:underline"><a href="/usr/member/mypage">내 페이지</a></li> -->
+    <li><a href="/usr/today/store">가게</a></li>
     <li><a href="/usr/practice/practice ">PMP</a></li>
   </ol>
   <ul class="text-right">

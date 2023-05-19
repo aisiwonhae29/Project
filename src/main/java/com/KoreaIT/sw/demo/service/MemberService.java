@@ -60,6 +60,7 @@ public class MemberService {
 	public Member getMemberById(int loginedMemberId) {
 		return memberRepository.getMemberById(loginedMemberId);
 	}
-
+	
+	
 
 }

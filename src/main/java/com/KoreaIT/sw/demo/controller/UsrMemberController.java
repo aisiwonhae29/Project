@@ -20,19 +20,19 @@ import com.KoreaIT.sw.demo.vo.Rq;
 public class UsrMemberController {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
-	
+	//automatically link with memberService class object
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	private Rq rq;
-	
+	//verify userId is duplicated
 	@RequestMapping("/usr/member/getLoginIdDup")
 	@ResponseBody
 	public ResultData getLoginDup(String loginId) {
-		
+		//loginId retrieved userId from jsp page especially join.jsp in ajax method 
 		 if(Ut.empty(loginId)) { return ResultData.from("F-1", "아이디를 입력해주세요"); }
 		 Member existsMember = memberService.getMemberByuserId(loginId);
-	 
+		 
 		 if(existsMember != null) { return ResultData.from("F-2" , "해당 아이디는 사용중입니다",
 		  "loginId", loginId); }
 		

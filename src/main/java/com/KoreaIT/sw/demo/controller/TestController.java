@@ -24,6 +24,7 @@ public class TestController {
 	HttpServletResponse resp;
 	
 	MemberService memberService;
+	
 	@RequestMapping("/usr/practice/practice")
 	public String practicehome(Model model) {
 		Object a = m.getMemberById(1);;

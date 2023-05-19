@@ -1,7 +1,12 @@
 package com.KoreaIT.sw.demo.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import com.KoreaIT.sw.demo.vo.todayeat;
 
 @Mapper
 public interface TodayRepository {
@@ -15,7 +20,13 @@ public interface TodayRepository {
 			""")
 	void writeMenu(String date, String location, String menu, String usergendser, int userage);
 	
-	
+	@Select("""
+				SELECT COUNT(*) FROM todayeat, ${listElement}
+				WHERE todayeat.${listElement} = ${listElement}.${listElement} and todayeat.${listElement}=${listValue}
+				GROUP BY menuname
+				ORDER BY COUNT(*) DESC LIMIT 5;
+			""")
+	List<todayeat> getRankLists(String listElement, String listValue);
 }
 /*
  * @Insert(

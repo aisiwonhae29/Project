@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class eat {
+public class todayeat {
 	private int id;
 	private String date;
 	private String location;
