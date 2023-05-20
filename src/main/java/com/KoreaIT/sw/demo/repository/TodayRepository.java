@@ -27,6 +27,13 @@ public interface TodayRepository {
 				ORDER BY COUNT(*) DESC LIMIT 5;
 			""")
 	List<todayeat> getRankLists(String listElement, String listValue);
+	
+	@Select("""
+			SELECT * FROM todayeat
+			GROUP BY menuname
+			ORDER BY COUNT(*) DESC LIMIT 5;
+		""")
+List<todayeat> getMainRankLists();
 }
 /*
  * @Insert(

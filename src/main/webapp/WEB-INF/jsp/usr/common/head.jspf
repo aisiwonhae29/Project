@@ -46,7 +46,7 @@ src :  url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
     <li><a href="/usr/today/store">가게</a></li>
     <li><a href="/usr/practice/practice ">PMP</a></li>
   </ol>
-  <ul class="text-right">
+  <ul class="text-right mt-3">
   	<c:if test="${!rq.logined }">
     <li><a href="/usr/member/login">로그인</a>/<a href="/usr/member/join">회원가입</a></li>
     </c:if>

@@ -50,6 +50,7 @@ public class UsrMemberController {
 		
 		 return ResultData.from("S-1","사용 가능!", "useremail", useremail);
 	}
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(@RequestParam(defaultValue = "/") String afterLoginUri, String userid, String userpw, String username,  @RequestParam("userage") int userage, String userlocation, String usergender, String useremail) {

@@ -24,4 +24,12 @@ public class TodayService {
 		rankLists=todayRepository.getRankLists(listElement, listValue);
 		return rankLists;
 	}
+	
+	public List<todayeat> getMainRankLists(){
+		List<todayeat> mainRankLists = null;
+		
+		mainRankLists=todayRepository.getMainRankLists();
+		
+		return mainRankLists;
+	}
 }

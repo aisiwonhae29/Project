@@ -11,7 +11,7 @@ public class todayeat {
 	private int id;
 	private String date;
 	private String location;
-	private String menu;
+	private String menuname;
 	private String usergender;
 	private int userage;
 }

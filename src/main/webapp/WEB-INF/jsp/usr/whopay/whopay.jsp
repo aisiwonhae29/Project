@@ -11,7 +11,7 @@
 		<button id="up">>></button>
 </div>
 <div>
-		<button id="submit" type="submit">확인</button>
+		<button id="getpeople" type="submit">확인</button>
 		<button id="retry">다시</button>
 </div>
 <div>
@@ -26,6 +26,7 @@
 <script>
 	var eatmember=[];
 	var random=[]
+	var cofirm;
 	$(document).ready(
 			function() {
 				$('retry').click(
@@ -33,7 +34,7 @@
 							
 				})
 						
-				$("#submit").click(
+				$("#getpeople").click(
 						function() {
 							if (parseInt($('#num').val()) < 2
 									|| parseInt($('#num').val()) > 8) {

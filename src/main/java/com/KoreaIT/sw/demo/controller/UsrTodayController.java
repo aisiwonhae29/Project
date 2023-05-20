@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.TodayService;
@@ -50,12 +51,13 @@ public class UsrTodayController {
 	
 	@RequestMapping("/usr/today/whopaynum")
 	public String whopaynum(String number, Model model) {
-		model.addAttribute("num", number);
+		model.addAttribute("getpeople", number);
 		return "usr/whopay/whopaynum";
 	}
 	
 	@RequestMapping("/usr/today/where")
-	public String where() {
-		return "usr/menuselec/menuselec";
+	public String where(@RequestParam(defaultValue = "월평동") String menu, Model model) {
+		model.addAttribute("menu", menu);
+		return "usr/where/where";
 	}
 }
