@@ -20,12 +20,16 @@ public interface MemberRepository  {
 			userid = #{userid}, 
 			userpw = #{userpw}, 
 			username = #{username}, 
-			userlocation = #{userlocation}, 
+			location= #{location}, 
 			userage = #{userage}, 
 			usergender = #{usergender},	
-			useremail=#{useremail}		
+			useremail=#{useremail}	,
+			nickname=#{nickname},
+			cellphoneNum=#{cellphoneNum},
+			regDate=now(),	
+			updateDate=now()
 			""")
-	public void doJoin(String userid, String userpw, String username, String userlocation, int userage, String usergender, String useremail);
+	public void doJoin(String userid, String userpw, String username, String location, int userage, String usergender, String useremail, String nickname, String cellphoneNum);
 	
 	@Insert("insert into a set `name`=#{name}")
 	public void practice(String name);

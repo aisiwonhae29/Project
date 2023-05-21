@@ -15,13 +15,14 @@ public class MemberService {
 		this.memberRepository = memberRepository;
 	}
 	
-	public ResultData join(String userid, String userpw, String username, int userage, String userlocation, String usergender, String useremail) {
+	public ResultData join(String userid, String userpw, String username, int userage, String location, String usergender, String useremail, String nickname, String cellphoneNum) {
 		/* Member existmember = getMemberByuserId(userid); */
 		
-		memberRepository.doJoin(userid, userpw, username, userlocation, userage, usergender, useremail);
+		memberRepository.doJoin(userid, userpw, username, location, userage, usergender, useremail, nickname, cellphoneNum);
 		int id=memberRepository.getLastInsertId();
 		return ResultData.from("S-1", "회원가입이 완료되었습니다!","id", id);
 	}
+	
 //	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 //			String email) {
 //		// 로그인 아이디 중복체크
