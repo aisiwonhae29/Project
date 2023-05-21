@@ -1,8 +1,12 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MAIN" />
-<%@ include file="../common/head.jspf"%>
+<!DOCTYPE html>
+<html data-theme="cyberpunk">
 <hr />
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
 <div>여기는 연습페이지이다</div>
 <input value="버튼" onclick="location.href='/practice/home/historyback';" type="button" />
 <a href="/practice/home/historyback">버튼이 안눌리넹;;</a>

@@ -1,7 +1,5 @@
 package com.KoreaIT.sw.demo.vo;
 
-
-
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,4 +88,60 @@ public class Rq {
 		// TODO Auto-generated method stub
 		
 	}
+	public boolean isNotLogined() {
+		return !isLogined;
+	}
+	public String jsHitoryBackOnView(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+		return "usr/common/js";
+
+	}
+	public String getImgUri(int id) {
+		return "/common/genFile/file/article/" + id + "/extra/Img/1";
+	}
+
+	public String getProfileFallbackImgUri() {
+		return "https://via.placeholder.com/150/?text=*^_^*";
+	}
+
+	public String getProfileFallbackImgOnErrorHtml() {
+		return "this.src = '" + getProfileFallbackImgUri() + "'";
+	}
+
+	public String getRemoveProfileImgIfNotExitOnErrorHtmlAttr() {
+		return "$(this).remove()";
+	}
+	public String getEncodedCurrentUri() {
+		return Ut.getEncodedCurrentUri(getCurrentUri());
+	}
+
+	public String getArticleDetailUriFromArticleList(Article article) {
+		return "/usr/article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
+	}
+
+	public String getFindLoginIdUri() {
+		return "/usr/member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+	}
+
+	private String getAfterFindLoginIdUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getFindLoginPwUri() {
+		return "/usr/member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+	}
+
+	private String getAfterFindLoginPwUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public boolean isAdmin() {
+		if (isLogined == false) {
+			return false;
+		}
+
+		return loginedMember.isAdmin();
+	}
+
 }
