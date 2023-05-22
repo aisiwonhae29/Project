@@ -51,6 +51,20 @@ public class UsrMemberController {
 		 return ResultData.from("S-1","사용 가능!", "useremail", useremail);
 	}
 	
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
+			String email) {
+
+		Member member = memberService.getMemberByuserId(loginId);
+
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum,
+				email);
+
+		return rq.jsReplace(modifyRd.getMsg(), "../member/mypage");
+	}
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(@RequestParam(defaultValue = "/") String afterLoginUri, String userid, String userpw, String username,  @RequestParam("userage") int userage, String location, String usergender,
@@ -127,11 +141,13 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doCheckPw")
 	@ResponseBody
 	public String doCheckPw(String loginPw, String replaceUri) {
-		 if(rq.getLoginedMember().getUserpw().equals(loginPw)==false) {
-			 return rq.jsHistoryBack("", "비밀번호가 다릅니다");
+		 if(((String) rq.getLoginedMember().getUserpw()).equals(loginPw)==false) {
+//			 return "<script>"+ "alert(\'"+rq.getLoginedMember().getUserpw()+"\')</script>";
+			 return "<script>"+ "alert(\'"+rq.getLoginedMember().getUserpw().equals(loginPw)+"pW:"+loginPw +"\');   </script>";
+//			 return rq.jsHistoryBack("", "비밀번호가 다릅니다");
 		 };
-		 
-		 return rq.jsReplace("", replaceUri);
+//		 return "<script>"+ "alert(\'"+"맞았는데 왜그래;"+"\')</script>";
+		 return "<script>location.replace(\"/usr/member/modify\")</script>";
 	}
 	
 	@RequestMapping("/usr/member/modify")

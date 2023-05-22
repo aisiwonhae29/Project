@@ -54,8 +54,7 @@
 		
 			</tbody>
 		</table>
-		<button><a href="../member/checkPw?replaceUri=
-		${Ut.getEncodedUri('../member/modify') }">회원정보 수정</a></button>
+		<a href="../member/checkPw?replaceUri=${Ut.getEncodedUri('../member/modify') }" class="btn btn-active btn-ghost">회원정보 	수정</a>
 		</div>
 	</div>
 </section>

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <section class="flex justify-around">
-<c:forEach begin="1" end ="${num }" var="i">
+<c:forEach begin="1" end ="${getpeople }" var="i">
 	<div >
 	<div id="<c:out value = "${i}"/>">as</div>
 	<!-- <form onsubmit="confirmclick; return false;"> -->

@@ -37,11 +37,19 @@
       </li>
       <li>
         <div class="inputName">위치</div>
-        <input class="w-56 border-b-2 border-red-600" type="text" name="userlocation">
+        <input class="w-56 border-b-2 border-red-600" type="text" name="location">
       </li>
       <li>
         <div class="inputName">성별</div>
         <input class="w-56 border-b-2 border-red-600" type="text" name="usergender">
+      </li>
+       <li>
+        <div class="inputName">별명</div>
+        <input class="w-56 border-b-2 border-red-600" type="text" name="nickname">
+      </li>
+       <li>
+        <div class="inputName">h.p</div>
+        <input class="w-56 border-b-2 border-red-600" type="text" name="cellphoneNum">
       </li>
       
     </ol>
@@ -70,12 +78,20 @@ function check(form){
 		alert('나이항목에 숫자를 입력해주세요');
 		return;
 	}
-	if(form.userlocation.value.trim()==0){
+	if(form.location.value.trim()==0){
 		alert('지역을 입력해주세요');
 		return;
 	}
 	if(form.usergender.value.trim()!="남"&&form.usergender.value.trim()!="여"){
 		alert('남/여 중 하나를 입력해주세요')
+		return;
+	}
+	if(form.nickname.value.trim()==0){
+		alert('닉네임을 입력해주세요');
+		return;
+	}
+	if(form.cellphoneNum.value.trim()==0){
+		alert('핸드폰 번호를 입력해주세요');
 		return;
 	}
 	form.submit();
@@ -126,7 +142,7 @@ function emaildupCheck(){
 }
 .login_Box{
   width: 400px;
-  height: 500px;
+  height: 600px;
 }
 </style>
 
