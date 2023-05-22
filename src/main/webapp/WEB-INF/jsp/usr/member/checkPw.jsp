@@ -16,7 +16,7 @@
 					<tbody>
 						<tr>
 							<th>아이디</th>
-							<td>${rq.loginedMember.loginId }</td>
+							<td>${rq.loginedMember.userid }</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
