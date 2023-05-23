@@ -3,9 +3,9 @@
 <c:set var="pageTitle" value="MAIN" />
 <%@ include file="../common/head.jspf"%>
 
-<hr />
 <div></div>
  <style>
+ 		#imgbox{ width: 350px}
         #no{ width: 100px; }
         #menu{width: 200px;}
         th{ border: 1px solid #000;}
@@ -25,30 +25,45 @@
                         <tbody>
                             <tr class="menulist">
                                 <td class="text-center">1</td>
-                                <td><a href="/usr/today/where?menu=${mainRankLists[0].menuname }">${mainRankLists[0].menuname }</a></td>
+                                <td><a id="1stRankval" href="/usr/today/where?menu=${mainRankLists[0].menuname }">${mainRankLists[0].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">2</td>
-                                <td><a href="/usr/today/where?menu=${mainRankLists[1].menuname }">${mainRankLists[1].menuname }</a></td>
+                                <td><a id="2ndRankval" href="/usr/today/where?menu=${mainRankLists[1].menuname }">${mainRankLists[1].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">3</td>
-                                <td><a href="/usr/today/where?menu=${mainRankLists[2].menuname }">${mainRankLists[2].menuname }</a></td>
+                                <td><a id="3rdRankval" href="/usr/today/where?menu=${mainRankLists[2].menuname }">${mainRankLists[2].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">4</td>
-                                <td><a href="/usr/today/where?menu=${mainRankLists[3].menuname }">${mainRankLists[3].menuname }</a></td>
+                                <td><a id="4thRankval" href="/usr/today/where?menu=${mainRankLists[3].menuname }">${mainRankLists[3].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">5</td>
-                                <td><a href="/usr/today/where?menu=${mainRankLists[4].menuname }">${mainRankLists[4].menuname }</a></td>
+                                <td><a id="5thRankval" href="/usr/today/where?menu=${mainRankLists[4].menuname }">${mainRankLists[4].menuname }</a></td>
                             </tr>
                         </tbody>
 				</table>
 		</div>
         <div id="imgbox">
-            d
+        <img src="https://blog.kakaocdn.net/dn/YPxRW/btrzhpNljHH/Zv9tsjGi82dNOjpLdkflh0/img.jpg" alt="" />
         </div>
+        <script>
+  		$('.menulist').mouseover(function () {
+  			$(this).css('background-color','red');
+        });
+  		$('.menulist').mouseleave(function () {
+  			$(this).css('background-color','white');
+        });
+        $("#1stRankval").attr("href", "Asdasdasd");
+        function showDish(){
+        	$('.menulist')
+        	alert(${mainRankList[1].menuname});
+        	alert();
+        }
+        
+        </script>
 </div>
 </section>
 <%@ include file="../common/foot.jspf"%>

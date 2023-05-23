@@ -12,6 +12,7 @@
         tr{ border-bottom: 1px solid rgb(250,87,87);}
         .menulist:hover{background-color: rgb(250,87,87); transition: 1s; opacity: 0.5; ;} 
         .menulist>td>a{display: block;  text-align: center;}   
+        img{transition:2s;}
         </style>
     <section class="mainrank absolute w-full bottom-32 ">
     <div class="flex justify-around items-center">
@@ -25,29 +26,30 @@
                         <tbody>
                             <tr class="menulist">
                                 <td class="text-center">1</td>
-                                <td><a id="1stRankval" href="/usr/today/where?menu=${mainRankLists[0].menuname }">${mainRankLists[0].menuname }</a></td>
+                                <td><a onmousemove="pickimage(this)" id="1stRankval" href="/usr/today/where?menu=${mainRankLists[0].menuname }">${mainRankLists[0].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">2</td>
-                                <td><a id="2ndRankval" href="/usr/today/where?menu=${mainRankLists[1].menuname }">${mainRankLists[1].menuname }</a></td>
+                                <td><a onmousemove="pickimage(this)" id="2ndRankval" href="/usr/today/where?menu=${mainRankLists[1].menuname }">${mainRankLists[1].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">3</td>
-                                <td><a id="3rdRankval" href="/usr/today/where?menu=${mainRankLists[2].menuname }">${mainRankLists[2].menuname }</a></td>
+                                <td><a onmousemove="pickimage(this)" id="3rdRankval" href="/usr/today/where?menu=${mainRankLists[2].menuname }">${mainRankLists[2].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">4</td>
-                                <td><a id="4thRankval" href="/usr/today/where?menu=${mainRankLists[3].menuname }">${mainRankLists[3].menuname }</a></td>
+                                <td><a onmousemove="pickimage(this)" id="4thRankval" href="/usr/today/where?menu=${mainRankLists[3].menuname }">${mainRankLists[3].menuname }</a></td>
                             </tr>
                             <tr class="menulist">
                                 <td class="text-center">5</td>
-                                <td><a id="5thRankval" href="/usr/today/where?menu=${mainRankLists[4].menuname }">${mainRankLists[4].menuname }</a></td>
+                                <td><a onmousemove="pickimage(this)" id="5thRankval" href="/usr/today/where?menu=${mainRankLists[4].menuname }">${mainRankLists[4].menuname }</a></td>
                             </tr>
                         </tbody>
 				</table>
 		</div>
+		<div id="sdf">sdf</div>
         <div id="imgbox">
-        <img src="https://blog.kakaocdn.net/dn/YPxRW/btrzhpNljHH/Zv9tsjGi82dNOjpLdkflh0/img.jpg" alt="" />
+        <img id="rankfoodimg" src="https://blog.kakaocdn.net/dn/YPxRW/btrzhpNljHH/Zv9tsjGi82dNOjpLdkflh0/img.jpg" alt="" />
         </div>
         <script>
   		$('.menulist').mouseover(function () {
@@ -56,7 +58,6 @@
   		$('.menulist').mouseleave(function () {
   			$(this).css('background-color','white');
         });
-        $("#1stRankval").attr("href", "Asdasdasd");
         function showDish(){
         	$('.menulist')
         	alert(${mainRankList[1].menuname});
