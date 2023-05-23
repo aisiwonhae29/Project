@@ -25,7 +25,7 @@
 #placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
 #placesList .item .marker_1 {background-position: 0 -10px;}
 #placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_3 {background-position: 0 -102px;}
 #placesList .item .marker_4 {background-position: 0 -148px;}
 #placesList .item .marker_5 {background-position: 0 -194px;}
 #placesList .item .marker_6 {background-position: 0 -240px;}
@@ -49,7 +49,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="대전 제육 볶음" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -83,7 +83,7 @@ function placesSearchCB(data, status, pagination) {
 
         alert('검색 결과 중 오류가 발생했습니다.');
         return;
-
+     
     }
 }
 // 마커를 담을 배열입니다
@@ -91,7 +91,7 @@ var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(36.361, 127.375), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 

@@ -47,7 +47,6 @@
                         </tbody>
 				</table>
 		</div>
-		<div id="sdf">sdf</div>
         <div id="imgbox">
         <img id="rankfoodimg" src="https://blog.kakaocdn.net/dn/YPxRW/btrzhpNljHH/Zv9tsjGi82dNOjpLdkflh0/img.jpg" alt="" />
         </div>
