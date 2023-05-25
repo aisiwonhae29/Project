@@ -3,6 +3,13 @@
 <!DOCTYPE html>
 <html data-theme="bumblebee">
 <head>
+<script>
+var Location = null;
+var myLatitude;
+var myLongitude;
+
+
+</script>
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
 <!-- 제이쿼리 불러오기 -->
@@ -13,6 +20,7 @@
 <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 <!-- 이미지 정보 -->
 <script src="/resource/common.js" defer="defer"></script>
+<script src="/resource/geo.js" ></script>
 <!-- 데이지 UI -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
 <!-- 폰트어썸 불러오기 -->

@@ -7,8 +7,8 @@
 	    <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.map_wrap {position:relative;width:100%;height:600px;}
+#menu_wrap {position:absolute;top:0;right:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -43,25 +43,44 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
 <div class="map_wrap">
-    <div id="map" style=" width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style=" width:600px;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="대전 제육 볶음" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="칼국수" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
         </div>
         <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
+        	<ul id="placesList"></ul>
+        	<div id="pagination"></div>
     </div>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56df77a2193b126495f95035a4f0197f&libraries=services"></script>
 <script>
+var query = "칼국수"
+	var mylatitude=127.377 ;
+	var mylongitude=36.361133; 
+	var querydocs;
+//키워드 검색을 요청하는 함수입니다
+function searchPlaces() {
+
+    var keyword = document.getElementById('keyword').value;
+
+    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        alert('키워드를 입력해주세요!');
+        return false;
+    }
+
+    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+    ps.keywordSearch( keyword, placesSearchCB, {x : mylatitude, y: mylongitude}); 
+}
+
+
     // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
     var valuefinder;
 function placesSearchCB(data, status, pagination) {
@@ -92,7 +111,7 @@ var markers = [];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(36.361, 127.375), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 1 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -106,20 +125,6 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 키워드로 장소를 검색합니다
 searchPlaces();
-
-// 키워드 검색을 요청하는 함수입니다
-function searchPlaces() {
-
-    var keyword = document.getElementById('keyword').value;
-
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-        return false;
-    }
-
-    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-    ps.keywordSearch( keyword, placesSearchCB); 
-}
 
 
 
