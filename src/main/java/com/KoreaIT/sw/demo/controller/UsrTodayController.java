@@ -56,8 +56,13 @@ public class UsrTodayController {
 	}
 	
 	@RequestMapping("/usr/today/where")
-	public String where(@RequestParam(defaultValue = "월평동") String menu, Model model) {
+	public String where(@RequestParam(defaultValue = "맛집") String menu, Model model) {
 		model.addAttribute("menu", menu);
 		return "usr/where/where";
+	}
+	@RequestMapping("/usr/today/eat")
+	public String showeat(Model model) {
+		
+		return "usr/eat/eat";
 	}
 }

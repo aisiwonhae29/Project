@@ -60,10 +60,13 @@ public class TestController {
 	public String whopaypr() {
 		return "usr/practice/whopaypr";
 	}
+
 	@RequestMapping("/usr/practice/txt")
 	public String ajax1st() {
 		return "usr/practice/txt";
 	}
+	
+
 //despite no requestservlet, with postmethod controller can manage input data 
 //	@RequestMapping("/usr/practice/postexample")
 //	@ResponseBody

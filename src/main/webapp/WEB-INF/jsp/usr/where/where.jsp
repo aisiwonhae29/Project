@@ -8,7 +8,7 @@
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:600px;}
-#menu_wrap {position:absolute;top:0;right:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap {top:0;right:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -42,14 +42,19 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
-<div class="map_wrap">
+<div class="map_wrap flex justify-around">
+	<div id="leftBox">
+    <div class="flex justify-between" >
+    <div id="myLocation" class="flex " style="font-size: 1rem;">대전 월평동</div>
+    <button onclick="changemylocation()">현재 위치에서</button>
+	</div>
     <div id="map" style=" width:600px;height:100%;position:relative;overflow:hidden;"></div>
-
+	</div>
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="칼국수" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="${menu }" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -62,10 +67,54 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56df77a2193b126495f95035a4f0197f&libraries=services"></script>
 <script>
+var myaddress_name;
+$(document).ready(function () {
+    addressshow();
+});
+function changemylocation(){
+		getLocation();
+		setTimeout(function() { addressshow(); }, 500);
+		setTimeout(function() { searchPlaces(); }, 500);
+		
+}
+function getLocation() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(getPosition);
+	} else {
+		alert('권한을 설정하지 않으셨습니다');
+		return false;
+	}
+}
+function getPosition(position) {
+	mylatitude=position.coords.latitude; 
+	mylongitude=position.coords.longitude;
+}
+/* function changemylocation(){
+	mylatitude=127.427;
+	mylongitude=36.3278;
+	searchPlaces();
+	addressshow();
+} */
+function addressshow(){
+    $.ajax({
+    type: "GET",
+    url: "https://dapi.kakao.com/v2/local/geo/coord2address.json",
+    headers: { "Authorization": "KakaoAK " + "9878f9fec3164d6fb054ed74a47d98c8" },
+    data: ({"x":mylongitude , "y": mylatitude} ),
+    contentType: "text/html; charset=utf-8",
+    dataType: "json",
+    success: function (response) {
+        $('#myLocation').text(response.documents[0].address.address_name);
+        myaddress_name=response.documents[0].address.address_name;
+    }
+});
+}
+// ----------------------------------------variable control
 var query = "칼국수"
-	var mylatitude=127.377 ;
-	var mylongitude=36.361133; 
+	var mylatitude=127.427 ;
+	var mylongitude=36.3278; 
 	var querydocs;
+	
 //키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
@@ -81,8 +130,7 @@ function searchPlaces() {
 }
 
 
-    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-    var valuefinder;
+
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
         valuefinder=data;
