@@ -14,19 +14,19 @@ CREATE TABLE `todayeat` (
   );
 INSERT INTO todayeat (shopname, menuname, location, usergender, date, userage)
 VALUES 
-( '김가네', '제육볶음', '월평동','man', CURDATE(),33 ),
-( '롯데리아', '햄버거', '월평동','woman', CURDATE(),22 ),
-( '김가네', '제육볶음', '월평동','man', CURDATE(),15 ),
-( '선사삼계탕', '삼계탕', '월평동','woman', CURDATE(),22 ),
-( '선사삼계탕', '삼계탕', '월평동','man', CURDATE(),25 ),
-( '선사삼계탕', '삼계탕', '월평동','woman', CURDATE(),44 ),
-( '5.5닭갈비', '닭갈비', '월평동','man', CURDATE(),55 ),
-( '진달래반점', '짜장면', '월평동','man', CURDATE(),67 ),
-( '진달래반점', '짬뽕', '월평동','man', CURDATE(),23 ),
-( 'bbq', '치킨', '월평동','man', CURDATE(),33 ),
-( '롯데리아', '햄버거', '월평동','woman', CURDATE(),48 ),
-( '김가네', '제육볶음', '월평동','man', CURDATE(),23 ),
-( '선사삼계탕', '삼계탕', '월평동','woman', CURDATE(),14 );
+( '김가네', '제육볶음', '월평동','남', CURDATE(),33 ),
+( '롯데리아', '햄버거', '월평동','여', CURDATE(),22 ),
+( '김가네', '제육볶음', '월평동','남', CURDATE(),15 ),
+( '선사삼계탕', '삼계탕', '월평동','여', CURDATE(),22 ),
+( '선사삼계탕', '삼계탕', '월평동','남', CURDATE(),25 ),
+( '선사삼계탕', '삼계탕', '월평동','여', CURDATE(),44 ),
+( '5.5닭갈비', '닭갈비', '월평동','남', CURDATE(),55 ),
+( '진달래반점', '짜장면', '월평동','남', CURDATE(),67 ),
+( '진달래반점', '짬뽕', '월평동','남', CURDATE(),23 ),
+( 'bbq', '치킨', '월평동','남', CURDATE(),33 ),
+( '롯데리아', '햄버거', '월평동','여', CURDATE(),48 ),
+( '김가네', '제육볶음', '월평동','남', CURDATE(),23 ),
+( '선사삼계탕', '삼계탕', '월평동','여', CURDATE(),14 );
 
 
 CREATE TABLE `member` (
@@ -51,9 +51,9 @@ CREATE TABLE `member` (
 INSERT INTO member ( userid, userpw, username, location, userage, usergender,
    useremail, `authLevel`, nickname, cellphoneNum )
 VALUES 
-('test1', 'test1', '홍길동', 'test1', 25 , 'man', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
-('test2', 'test2', '임꺽정', 'test2', 35 , 'man', 'lgj992@hanmail.net',3,'회원2','01043214321'),
-('test3', 'test3', '심사임', 'test3', 45 , 'woman', 'llmom44@lycos.com',3,'회원3','01011112222');
+('test1', 'test1', '홍길동', 'test1', 25 , '남', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
+('test2', 'test2', '임꺽정', 'test2', 35 , '남', 'lgj992@hanmail.net',3,'회원2','01043214321'),
+('test3', 'test3', '심사임', 'test3', 45 , '여', 'llmom44@lycos.com',3,'회원3','01011112222');
 
 CREATE TABLE `location` (
   id INT(11) NOT NULL AUTO_INCREMENT,
@@ -69,7 +69,7 @@ CREATE TABLE `usergender` (
   PRIMARY KEY (id)
 );
 INSERT INTO `usergender` (usergender)
-VALUES ('man'), ('woman');
+VALUES ('남'), ('여');
 
 CREATE TABLE menu (
   id INT(11) NOT NULL AUTO_INCREMENT,
@@ -98,7 +98,7 @@ SELECT * from todayeat;
 select * from location;
 
 SELECT menuname, COUNT(*) FROM todayeat, usergender
-where usergender.usergender=todayeat.usergender and todayeat.usergender='man'
+where usergender.usergender=todayeat.usergender and todayeat.usergender='남'
 GROUP BY menuname
 ORDER BY COUNT(*) DESC LIMIT 5;
 
@@ -110,7 +110,7 @@ SELECT * FROM todayeat
 GROUP BY menuname
 ORDER BY COUNT(*) DESC LIMIT 5;
 
-select * from member where usergender='man';
+select * from member where usergender='남';
 
 # 게시물 테이블 생성
 CREATE TABLE article(

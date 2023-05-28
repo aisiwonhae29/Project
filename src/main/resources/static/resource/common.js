@@ -15,8 +15,7 @@ imageArray.set('짬뽕', jjambbong);
 imageArray.set('치킨', chicken);
 imageArray.set('짜장면', jjajangmyoen)
 
-function pickimage(data){
-	$('#rankfoodimg').attr('src', imageArray.get(data.textContent));
 
-}
+
+
 	
