@@ -48,6 +48,10 @@ public class UsrTodayController {
 		
 		return "asds";
 	}
+	@RequestMapping("/usr/today/getRankList")
+	public String getRankLists2(String listElement, String listValue, Model model) {
+		return "ASd";
+	}
 	
 	@RequestMapping("/usr/today/whopaynum")
 	public String whopaynum(String number, Model model) {
