@@ -18,10 +18,12 @@ public class TodayService {
 		this.todayRepository=todayrepository;
 	}
 	
-	public List<todayeat> getRankLists(String listElement, String listValue) {
+	public List<todayeat> getRankLists(String[] consComb) {
 		List<todayeat> rankLists = null;
 		
-		rankLists=todayRepository.getRankLists(listElement, listValue);
+		String clause = makeConstraint(consComb);
+		
+		rankLists=todayRepository.getRankLists(clause);
 		return rankLists;
 	}
 	
@@ -31,5 +33,20 @@ public class TodayService {
 		mainRankLists=todayRepository.getMainRankLists();
 		
 		return mainRankLists;
+	}
+	public String makeConstraint(String[] consComb) {
+		if(consComb[0].equals("userage")) {
+			consComb[1]=consComb[1].substring(0, 2);
+			int consNum = Integer.parseInt(consComb[1]);
+			return String.format("userage between %d and %d", consNum, consNum+10);
+		}else if(consComb[0].equals("usergender")) {
+			consComb[1]=consComb[1].substring(0, 1);
+			return String.format("usergender = '%s'", consComb[1]);
+		}else {
+			return String.format("menuname IN(SELECT menuname FROM `menu`, foodtype WHERE menu.foodtype=foodtype.id AND foodtype.foodtype='%s') ",consComb[1]);
+		}
+	}
+	public String test1(String el1) {
+		return el1;
 	}
 }

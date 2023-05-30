@@ -31,6 +31,12 @@ public class TestController {
 		model.addAttribute("v", a);
 		return "usr/practice/practice";
 	}
+	@RequestMapping("/usr/practice/ajaxmsg")
+	@ResponseBody
+	public String ajaxmsg(String msg) {
+//		return String.format("<script>alert('%s')</script>",msg );
+		return msg;
+	}
 	
 	//historyback method need ResponseBody must!
 	@RequestMapping("/practice/home/historyback")

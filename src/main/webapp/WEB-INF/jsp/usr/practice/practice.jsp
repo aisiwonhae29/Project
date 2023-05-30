@@ -1,9 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MAIN" />
-<!DOCTYPE html>
-<html data-theme="cyberpunk">
+<%@ include file="../common/head.jspf" %>
 <hr />
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
@@ -31,6 +29,21 @@
 <img src="/images/gora.png" alt="Your Image">
 <img src="${pageContext.request.contextPath}/static/gora.png" alt="Your Image">
 <img src="${pageContext.request.contextPath}/static/${java.net.URLEncoder.encode('gora.png', 'UTF-8')}" alt="Your Image">
+<hr />
+<button onclick="testajax()">testajax</button>
+<script>
+	function testajax(){
+	    $.ajax({
+            type: "post",
+            url: "../practice/ajaxmsg",
+            data: {msg : "sdf" , sss: "qwe"},
+            dataType: "text",
+            success: function (response) {
+                alert(response);
+            }
+        });
+	}
+</script>
 <%@ include file="../common/foot.jspf"%>
 <!-- <form action="../practice/postexample" method="POST">
 <input type="text" name="id" />

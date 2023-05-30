@@ -27,7 +27,7 @@
 </style>
 <script>
 var conditionbox=[];
-
+var conditionvaluebox=[];
 function findWithCondition(element){
 	//alert($(element).attr('type'));
 	if($(element).attr('class')=="btn btn-outline m-0.5"){
@@ -44,27 +44,72 @@ function findWithCondition(element){
 			alert('같은조건 2개는 못골라용 ^^;;');
 			return false;
 		}
+		/* alert($(element).text());  */
 		conditionbox.push($(element).attr('type'));
-		$(element).attr('class','btn m-0.5 btn-secondary')
+		conditionvaluebox.push($(element).text());
+		/* conditionvaluebox.push($(element).textContent); */
+		$(element).attr('class','btn m-0.5 btn-secondary');
+		if(conditionbox.length==1){
+			searchRank();
+		};
 	}else{
 		$(element).attr('class',"btn btn-outline m-0.5");
 		var findIndex = conditionbox.indexOf($(element).attr('type'));
 		conditionbox.splice(findIndex, 1);
-	}
+		conditionvaluebox.splice(findIndex,1);
+  	}
+	console.log(conditionvaluebox);
 	/* console.log('end'+conditionbox); */
 }
 
  function searchRank(){
 	$.ajax({
 	    type: "post",
-	    url: "url",
-	    data: {},
-	    dataType: "dataType",
+	    url: "../today/getRankList",
+	    data: {"el1" : conditionbox[0]+conditionvaluebox[0]},
+	    dataType: "text",
 	    success: function (response) {
-	        
+	    	var array = JSON.parse(response);
+
+	    	var v1 = (array[0]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[0].menuname ;
+	    	var v2 = (array[1]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[1].menuname ;
+	    	var v3 = (array[2]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[2].menuname ;
+	    	var v4 = (array[3]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[3].menuname ;
+	    	var v5 = (array[4]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[4].menuname ;
+	    	
+	    	
+	    	$('#1stRankval').text(v1);
+	    	$('#2ndRankval').text(v2);
+	    	$('#3rdRankval').text(v3);
+	    	$('#4thRankval').text(v4);
+	    	$('#5thRankval').text(v5);
 	    }
 	});
 } 
+ function searchRankdouble(){
+		$.ajax({
+		    type: "post",
+		    url: "../today/getRankList",
+		    data: {"el1" : conditionbox[0]+conditionvaluebox[0]},
+		    dataType: "text",
+		    success: function (response) {
+		    	var array = JSON.parse(response);
+
+		    	var v1 = (array[0]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[0].menuname ;
+		    	var v2 = (array[1]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[1].menuname ;
+		    	var v3 = (array[2]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[2].menuname ;
+		    	var v4 = (array[3]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[3].menuname ;
+		    	var v5 = (array[4]?.menuname == null) ? "(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )" : array[4].menuname ;
+		    	
+		    	
+		    	$('#1stRankval').text(v1);
+		    	$('#2ndRankval').text(v2);
+		    	$('#3rdRankval').text(v3);
+		    	$('#4thRankval').text(v4);
+		    	$('#5thRankval').text(v5);
+		    }
+		});
+	} 
 
 </script>
 <body>
@@ -83,35 +128,35 @@ function findWithCondition(element){
 										<tr class="menulist">
 												<td class="text-center">1</td>
 												<td>
-														<a rel="rankfoodimg1" onmousemove="pickimage(this)" id="1stRankval"
-																href="/usr/today/where?menu=${mainRankLists[0].menuname }">${mainRankLists[0].menuname }</a>
+														<a rel="rankfoodimg1"  id="1stRankval"
+																href="/usr/today/where?menu=${rankLists[0].menuname }">${rankLists[0].menuname }</a>
 												</td>
 										</tr>
 										<tr class="menulist">
 												<td class="text-center">2</td>
 												<td>
-														<a rel="rankfoodimg2" onmousemove="pickimage(this)" id="2ndRankval"
+														<a rel="rankfoodimg2"  id="2ndRankval"
 																href="/usr/today/where?menu=${mainRankLists[1].menuname }">${mainRankLists[1].menuname }</a>
 												</td>
 										</tr>
 										<tr class="menulist">
 												<td class="text-center">3</td>
 												<td>
-														<a rel="rankfoodimg3" onmousemove="pickimage(this)" id="3rdRankval"
+														<a rel="rankfoodimg3" id="3rdRankval"
 																href="/usr/today/where?menu=${mainRankLists[2].menuname }">${mainRankLists[2].menuname }</a>
 												</td>
 										</tr>
 										<tr class="menulist">
 												<td class="text-center">4</td>
 												<td>
-														<a rel="rankfoodimg4" onmousemove="pickimage(this)" id="4thRankval"
+														<a rel="rankfoodimg4"  id="4thRankval"
 																href="/usr/today/where?menu=${mainRankLists[3].menuname }">${mainRankLists[3].menuname }</a>
 												</td>
 										</tr>
 										<tr class="menulist">
 												<td class="text-center">5</td>
 												<td>
-														<a rel="rankfoodimg5" onmousemove="pickimage(this)" id="5thRankval"
+														<a rel="rankfoodimg5"  id="5thRankval"
 																href="/usr/today/where?menu=${mainRankLists[4].menuname }">${mainRankLists[4].menuname }</a>
 												</td>
 										</tr>
@@ -120,23 +165,23 @@ function findWithCondition(element){
 				</div>
 				<div id="selectbox" class="">
 						<div id="select_items_1 ">
-								<div type= "age" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#20대</div>
-								<div type= "age" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#30대</div>
-								<div type= "age" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#40대</div>
-								<div type= "age" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#50대</div>
-								<div type= "age" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#60+</div>
+								<div type= "userage" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#20대</div>
+								<div type= "userage" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#30대</div>
+								<div type= "userage" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#40대</div>
+								<div type= "userage" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#50대</div>
+								<div type= "userage" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#60+</div>
 						</div>
 						<div id="select_items_2">
-								<div type="gen" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#남자</div>
-								<div type="gen" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#여자</div>
+								<div type="usergender" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#남자</div>
+								<div type="usergender" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#여자</div>
 						</div>
 						<div id="select_items_1 ">
-								<div type="fud" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#한식</div>
-								<div type="fud" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#중식</div>
-								<div type="fud" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#양식</div>
-								<div type="fud" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#일식</div>
-								<div type="fud" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#동남아</div>
-								<div type="fud" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#인도</div>
+								<div type="foodtype" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#한식</div>
+								<div type="foodtype" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#중식</div>
+								<div type="foodtype" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#양식</div>
+								<div type="foodtype" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#일식</div>
+								<div type="foodtype" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#동남아</div>
+								<div type="foodtype" class="btn btn-outline m-0.5" onclick="findWithCondition(this)">#인도</div>
 						</div>
 				</div>
 				<div id="randombox" class="h-full ">

@@ -21,12 +21,12 @@ public interface TodayRepository {
 	void writeMenu(String date, String location, String menu, String usergendser, int userage);
 	
 	@Select("""
-				SELECT COUNT(*) FROM todayeat, ${listElement}
-				WHERE todayeat.${listElement} = ${listElement}.${listElement} and todayeat.${listElement}=${listValue}
+				SELECT * FROM todayeat
+				WHERE ${condition}
 				GROUP BY menuname
 				ORDER BY COUNT(*) DESC LIMIT 5;
 			""")
-	List<todayeat> getRankLists(String listElement, String listValue);
+	List<todayeat> getRankLists(String condition);
 	
 	@Select("""
 			SELECT * FROM todayeat
