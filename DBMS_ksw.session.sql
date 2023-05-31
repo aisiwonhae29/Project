@@ -1,36 +1,36 @@
-drop database if exists pmp;
-create database pmp;
-use pmp;
+DROP DATABASE IF EXISTS pmp;
+CREATE DATABASE pmp;
+USE pmp;
 
 CREATE TABLE `todayeat` (
   id INT(11) NOT NULL AUTO_INCREMENT,
   shopname CHAR(200) NOT NULL,
   menuname CHAR(100) NOT NULL,
   location CHAR(100) NOT NULL,
-  `usergender` char(10) NOT null,
-  `date` DATE NOT NULL,
-  `userage` int(10) NOT NULL,
+  `usergender` CHAR(10) NOT NULL,
+  `date` DATETIME NOT NULL,
+  `userage` INT(10) NOT NULL,
    PRIMARY KEY (id)
   );
-INSERT INTO todayeat (shopname, menuname, location, usergender, date, userage)
+INSERT INTO todayeat (shopname, menuname, location, usergender, `date`, userage)
 VALUES 
-( '김가네', '제육볶음', '월평동','남', CURDATE(),33 ),
-( '롯데리아', '햄버거', '월평동','여', CURDATE(),22 ),
-( '김가네', '제육볶음', '월평동','남', CURDATE(),15 ),
-( '선사삼계탕', '삼계탕', '월평동','여', CURDATE(),22 ),
-( '선사삼계탕', '삼계탕', '월평동','남', CURDATE(),25 ),
-( '선사삼계탕', '삼계탕', '월평동','여', CURDATE(),44 ),
-( '5.5닭갈비', '닭갈비', '월평동','남', CURDATE(),55 ),
-( '진달래반점', '짜장면', '월평동','남', CURDATE(),67 ),
-( '진달래반점', '짬뽕', '월평동','남', CURDATE(),23 ),
-( 'bbq', '치킨', '월평동','남', CURDATE(),33 ),
-( '롯데리아', '햄버거', '월평동','여', CURDATE(),48 ),
-( '김가네', '제육볶음', '월평동','남', CURDATE(),23 ),
-( '선사삼계탕', '삼계탕', '월평동','여', CURDATE(),14 );
+( '김가네', '제육볶음', '월평동','남', NOW(),33 ),
+( '롯데리아', '햄버거', '월평동','여', NOW(),22 ),
+( '김가네', '제육볶음', '월평동','남', NOW(),15 ),
+( '선사삼계탕', '삼계탕', '월평동','여', NOW(),22 ),
+( '선사삼계탕', '삼계탕', '월평동','남', NOW(),25 ),
+( '선사삼계탕', '삼계탕', '월평동','여', NOW(),44 ),
+( '5.5닭갈비', '닭갈비', '월평동','남', NOW(),55 ),
+( '진달래반점', '짜장면', '월평동','남', NOW(),67 ),
+( '진달래반점', '짬뽕', '월평동','남', NOW(),23 ),
+( 'bbq', '치킨', '월평동','남', NOW(),33 ),
+( '롯데리아', '햄버거', '월평동','여', NOW(),48 ),
+( '김가네', '제육볶음', '월평동','남', NOW(),23 ),
+( '선사삼계탕', '삼계탕', '월평동','여', NOW(),14 );
 
-
+SELECT * FROM todayeat;
 CREATE TABLE `member` (
-  id INT(11) NOT NULL AUTO_INCREMENT,
+  id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   regDate DATETIME NOT NULL,
   updateDate DATETIME NOT NULL,
   userid CHAR(100) NOT NULL,
@@ -39,21 +39,28 @@ CREATE TABLE `member` (
   location CHAR(100) NOT NULL,
   userage INT(20) NOT NULL,
   usergender CHAR(10) NOT NULL,
-  useremail char(100) NOT null,
+  useremail CHAR(100) NOT NULL,
   `authLevel` SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반,7=관리자)',
   nickname CHAR(20) NOT NULL,
   cellphoneNum CHAR(20) NOT NULL,
   delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부 (0=탈퇴 전, 1=탈퇴 후)',
   delDate DATETIME COMMENT '탈퇴 날짜'
-
-  PRIMARY KEY (id)
 );
-INSERT INTO member ( userid, userpw, username, location, userage, usergender,
+INSERT INTO `member` ( userid, userpw, username, location, userage, usergender,
    useremail, `authLevel`, nickname, cellphoneNum )
 VALUES 
 ('test1', 'test1', '홍길동', 'test1', 25 , '남', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
 ('test2', 'test2', '임꺽정', 'test2', 35 , '남', 'lgj992@hanmail.net',3,'회원2','01043214321'),
 ('test3', 'test3', '심사임', 'test3', 45 , '여', 'llmom44@lycos.com',3,'회원3','01011112222');
+
+CREATE TABLE `foodtype` (
+id INT(11) NOT NULL AUTO_INCREMENT,
+foodtype CHAR(100) NOT NULL,
+PRIMARY KEY (id));
+
+INSERT INTO `foodtype`(foodtype)
+VALUES('한식'),('중식'),('양식'),('일식'),('동남아'),('분식'),('기타');
+SELECT * FROM foodtype;
 
 CREATE TABLE `location` (
   id INT(11) NOT NULL AUTO_INCREMENT,
@@ -75,11 +82,29 @@ CREATE TABLE menu (
   id INT(11) NOT NULL AUTO_INCREMENT,
   menuname CHAR(100) NOT NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY (menuname)
+  UNIQUE KEY (menuname),
+  `foodtype` INT(10)
 );
-INSERT INTO menu (menuname)
-VALUES ('닭갈비'), ('칼국수'), ('제육볶음'),('삼계탕'),('햄버거'),('짜장면'),('치킨');
+INSERT INTO menu (menuname, foodtype)
+VALUES ('닭갈비',1), ('칼국수',1), ('제육볶음',1),('삼계탕',1),('햄버거',3),('짜장면',2),('치킨',3),('짬뽕',2);
 
+INSERT INTO menu (menuname, foodtype)
+VALUES ('쌀국수',5), ('라면',6), ('떡볶이',6), ('까르보나라',3), ('김치찌개',1), ('된장찌개',1), ('순대국',1), ('감자탕',1);
+## eat page set constraint
+
+#VALUES('1한식'),('2중식'),('3양식'),('4일식'),('5동남아'),('6분식'),('7기타');
+
+SELECT * FROM `todayeat` WHERE usergender = '남';
+
+SELECT * FROM `todayeat` 
+WHERE menuname IN(SELECT menuname FROM `menu`, foodtype WHERE menu.foodtype=foodtype.id AND foodtype.foodtype='한식') AND usergender='남'
+GROUP BY menuname
+ORDER BY COUNT(*) DESC LIMIT 5;
+
+SELECT menuname, foodtype.foodtype 
+FROM menu, foodtype
+WHERE menu.foodtype=foodtype.id; 
+###
 CREATE TABLE shop (
   id INT(11) NOT NULL AUTO_INCREMENT,
   shopname CHAR(100) NOT NULL,
@@ -90,15 +115,15 @@ CREATE TABLE shop (
 INSERT INTO shop ( shopname, locationid)
 VALUES ( '김가네', 1 ), ('5.5닭갈비',1), ('동원칼국수',1),('선사삼계탕',1),('롯데리아',1),('bbq',1),('진달래반점',1);
 
-select * from usergender;
-SELECT * from member;
-SELECT * from shop;
-SELECT * from menu;
-SELECT * from todayeat;
-select * from location;
+SELECT * FROM usergender;
+SELECT * FROM `member`;
+SELECT * FROM shop;
+SELECT * FROM menu;
+SELECT * FROM todayeat;
+SELECT * FROM location;
 
 SELECT menuname, COUNT(*) FROM todayeat, usergender
-where usergender.usergender=todayeat.usergender and todayeat.usergender='남'
+WHERE usergender.usergender=todayeat.usergender AND todayeat.usergender='남'
 GROUP BY menuname
 ORDER BY COUNT(*) DESC LIMIT 5;
 
@@ -110,7 +135,7 @@ SELECT * FROM todayeat
 GROUP BY menuname
 ORDER BY COUNT(*) DESC LIMIT 5;
 
-select * from member where usergender='남';
+SELECT * FROM MEMBER WHERE usergender='남';
 
 # 게시물 테이블 생성
 CREATE TABLE article(
@@ -494,3 +519,18 @@ LEFT JOIN reactionPoint AS RP
 ON A.id = RP.relId AND RP.relTypeCode = 'article'
 GROUP BY A.id
 ORDER BY A.id DESC;
+
+DROP TABLE `test`;
+CREATE TABLE `test`(
+id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`number` INT(10) NOT NULL
+);
+
+INSERT INTO `test` (`number`)
+VALUES(1),(4),(7),(8),(2),(22),(44),(787),(41),(68),(37),(57),(89),(41),(57);
+INSERT INTO `test` (`number`)
+VALUES(2),(55),(21132),(112),(45),(7411),(527),(513),(63),(87),(77),(274),(14);
+SELECT * FROM `test`;
+
+SELECT * FROM `test` WHERE `number` BETWEEN 10 AND 40 AND id BETWEEN 1 AND 20;
+SELECT * FROM `test` WHERE `number` BETWEEN 1 AND 1000 AND EXISTS (SELECT * FROM `test`WHERE `number` BETWEEN 100 AND 1000);

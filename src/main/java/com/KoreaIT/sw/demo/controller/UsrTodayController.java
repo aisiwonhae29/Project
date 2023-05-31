@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.TodayService;
 import com.KoreaIT.sw.demo.util.Ut;
+import com.KoreaIT.sw.demo.vo.menu;
 import com.KoreaIT.sw.demo.vo.todayeat;
 
 @Controller
@@ -46,26 +47,19 @@ public class UsrTodayController {
 	@RequestMapping("/usr/today/getRankList")
 	@ResponseBody
 	public List<todayeat> getRankLists(String el1) {
-		
-		
 		  String[] consComb = el1.split("#"); 
-		  
-		  
 			  List<todayeat> rankLists=todayService.getRankLists(consComb);
 		return rankLists;				
 	}
 	
-	@RequestMapping("/usr/today/aa")
+	
+	@RequestMapping("/usr/today/getRankListDoubleCons")
 	@ResponseBody
-	public String as(String aa, String hi) {
-		return aa;
-	}
-	
-	
-	
-	@RequestMapping("/usr/today/getRankList2")
-	public String getRankLists2(String listElement, String listValue, Model model) {
-		return "ASd";
+	public List<todayeat> getRankLists2(String el1, String el2) {
+		String[] consComb = el1.split("#");
+		String[] consComb2 = el2.split("#");
+		List<todayeat> rankLists=todayService.getRankListsDoubleCons(consComb, consComb2);
+		return rankLists;
 	}
 
 	@RequestMapping("/usr/today/whopaynum")
@@ -85,4 +79,20 @@ public class UsrTodayController {
 
 		return "usr/eat/eat";
 	}
+	
+	@RequestMapping("/usr/today/getMenu")
+	@ResponseBody
+	public List<menu> getMenu(){
+		
+		List<menu> menuLists = todayService.getmenuLists();;
+		
+		return menuLists;
+	}
+	
+//	@RequestMapping("/usr/today/aa")
+//	@ResponseBody
+//	public String as(String aa, String hi) {
+//		return aa;
+//	}
+//
 }

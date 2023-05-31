@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class menu {
 	private int id;
 	private String menuname;
+	private int foodtype;
 	
 }

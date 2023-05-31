@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.KoreaIT.sw.demo.vo.menu;
 import com.KoreaIT.sw.demo.vo.todayeat;
 
 @Mapper
@@ -33,7 +34,20 @@ public interface TodayRepository {
 			GROUP BY menuname
 			ORDER BY COUNT(*) DESC LIMIT 5;
 		""")
-List<todayeat> getMainRankLists();
+	List<todayeat> getMainRankLists();
+	
+	@Select("""
+			SELECT * FROM todayeat
+			WHERE ${clause} and ${clause2}
+			GROUP BY menuname
+			ORDER BY COUNT(*) DESC LIMIT 5;
+		""")
+	List<todayeat> getRankListsDoubleCons(String clause, String clause2);
+
+	@Select(""" 
+			SELECT * FROM menu
+			""")
+	List<menu> getMenuLists();
 }
 /*
  * @Insert(
