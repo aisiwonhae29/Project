@@ -188,6 +188,25 @@
 	cursor: default;
 	color: #777;
 }
+
+td, th {
+	text-align: center;
+	height: 50px;
+}
+
+.eatclickbox {
+	height: 80px;
+}
+
+#goeat, #goeattogether {
+	width: 200px;
+}
+
+#mapinfovaluebox {
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+}
 </style>
 <div class="map_wrap flex justify-around">
 		<div id="leftBox">
@@ -197,8 +216,53 @@
 				</div>
 				<div id="map" style="width: 600px; height: 100%; position: relative; overflow: hidden;"></div>
 		</div>
-		<div id="control_box">
-				
+		<div id="control_box" class="w-80">
+				<table class="table">
+						<tr>
+								<th style="font-size: 1rem; height: 80px;">오늘 뭐먹지?</th>
+						</tr>
+						<tr>
+								<td>
+										<div class="btn btn-outline btn-error w-40 ">가게이름</div>
+								</td>
+						</tr>
+						<tr>
+								<td>
+										<div>어디?</div>
+								</td>
+						</tr>
+						<tr>
+								<td>
+										<div class="btn btn-outline btn-error w-40">메뉴는?</div>
+								</td>
+						</tr>
+						<tr>
+								<td>
+										<div>어디?</div>
+								</td>
+						</tr>
+						<tr>
+								<td>
+										<div class="btn btn-outline btn-error w-40">주소</div>
+								</td>
+						</tr>
+						<tr>
+								<td>
+										<div>어디?</div>
+								</td>
+						</tr>
+						<tr>
+								<td class="eatclickbox">
+										<div id="goeat" class="btn btn-info">점심 먹으러 가기!</div>
+								</td>
+						</tr>
+						<tr>
+								<td class="eatclickbox">
+										<div id="goeattogether" class="btn btn-info">여러명이서 먹어요!</div>
+								</td>
+						</tr>
+
+				</table>
 		</div>
 		<div id="menu_wrap" class="bg_white">
 				<div class="option">
@@ -219,6 +283,7 @@
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56df77a2193b126495f95035a4f0197f&libraries=services"></script>
 <script>
+	
 	var myaddress_name;
 	$(document).ready(function() {
 		addressshow();
@@ -294,6 +359,21 @@
 			y : mylatitude
 		});
 	}
+	setTimeout(() => {
+		kakao.maps.event.addListener(map, 'dragend', function() {        
+		    
+		    // 지도 중심좌표를 얻어옵니다 
+		    var latlng = map.getCenter(); 
+		    
+		    mylatitude=latlng.getLat();
+		    mylongitude=latlng.getLng();
+		    var keyword = document.getElementById('keyword').value;
+		    ps.keywordSearch(keyword, placesSearchCB, {
+				x : mylongitude,
+				y : mylatitude
+			});
+		});
+	}, 500);
 
 	function placesSearchCB(data, status, pagination) {
 		if (status === kakao.maps.services.Status.OK) {
@@ -395,10 +475,13 @@
 		// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 		map.setBounds(bounds);
 	}
-
+	
 	// 검색결과 항목을 Element로 반환하는 함수입니다
 	function getListItem(index, places) {
-
+		
+		window[itemel+index]= [{"주소":places.address_name}]
+		
+		
 		var el = document.createElement('li'), itemStr = '<span class="markerbg marker_'
 				+ (index + 1)
 				+ '"></span>'
@@ -421,7 +504,13 @@
 
 		return el;
 	}
-
+	var infoitemslists=[];
+	
+	 $(document).ready(function () {
+			$('.item').click(function(){
+				console.log($(this));
+			});
+     });
 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	function addMarker(position, idx, title) {
 		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다

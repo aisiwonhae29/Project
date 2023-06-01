@@ -20,10 +20,6 @@ th {
 	background-color: rgb(250, 87, 87);
 }
 
-tr {
-	background-color: red;
-}
-
 .menulist:hover {
 	background-color: rgb(250, 87, 87);
 	transition: 1s;
@@ -154,7 +150,7 @@ $(document).ready(function(){
 	$('#rankfoodimg5').attr('src', imageArray.get($('#5thRankval')[0].textContent));
 });
   		$('.menulist').mouseover(function () {
-  			$(this).css('background-color','blue');
+  			$(this).css('background-color','gold');
         });
   		$('.menulist').mouseleave(function () {
   			$(this).css('background-color','white');

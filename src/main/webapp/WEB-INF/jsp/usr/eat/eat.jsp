@@ -141,6 +141,7 @@ function findWithCondition(element){
  function setinrandomarray(Index, i, menuarray){
 	 setTimeout(()=>{
 		 $(".child").eq(Index).text(menuarray[randomarrayindex[i]].menuname);
+		 $(".child").eq(Index).attr('href','../today/where?menu='+menuarray[randomarrayindex[i]].menuname) ;
 		 console.log(menuarray[randomarrayindex[i]].menuname);
 	 }, 1000*i+1300);
  }
