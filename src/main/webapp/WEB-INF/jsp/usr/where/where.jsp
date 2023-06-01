@@ -228,7 +228,7 @@ td, th {
 						</tr>
 						<tr>
 								<td>
-										<div>어디?</div>
+										<div id="shopname">어디?</div>
 								</td>
 						</tr>
 						<tr>
@@ -238,7 +238,7 @@ td, th {
 						</tr>
 						<tr>
 								<td>
-										<div>어디?</div>
+										<div id="foodmenuitem">뭐?</div>
 								</td>
 						</tr>
 						<tr>
@@ -248,7 +248,7 @@ td, th {
 						</tr>
 						<tr>
 								<td>
-										<div>어디?</div>
+										<div id="whereaddress">어디?</div>
 								</td>
 						</tr>
 						<tr>
@@ -361,7 +361,7 @@ td, th {
 	}
 	setTimeout(() => {
 		kakao.maps.event.addListener(map, 'dragend', function() {        
-		    
+		
 		    // 지도 중심좌표를 얻어옵니다 
 		    var latlng = map.getCenter(); 
 		    
@@ -372,6 +372,10 @@ td, th {
 				x : mylongitude,
 				y : mylatitude
 			});
+		    setTimeout(()=>{
+		    	clicklievent();	
+		    }, 400);
+			
 		});
 	}, 500);
 
@@ -463,6 +467,7 @@ td, th {
 				itemEl.onmouseout = function() {
 					infowindow.close();
 				};
+				
 			})(marker, places[i].place_name);
 
 			fragment.appendChild(itemEl);
@@ -479,7 +484,7 @@ td, th {
 	// 검색결과 항목을 Element로 반환하는 함수입니다
 	function getListItem(index, places) {
 		
-		window[itemel+index]= [{"주소":places.address_name}]
+		window["itemel"+index]= [{"주소":places.address_name},{"가게이름":places.place_name}]
 		
 		
 		var el = document.createElement('li'), itemStr = '<span class="markerbg marker_'
@@ -491,7 +496,7 @@ td, th {
 
 		if (places.road_address_name) {
 			itemStr += '    <span>' + places.road_address_name + '</span>'
-					+ '   <span class="jibun gray">' + places.address_name
+					+ '   <span class="jibun gray adn">' + places.address_name
 					+ '</span>';
 		} else {
 			itemStr += '    <span>' + places.address_name + '</span>';
@@ -507,10 +512,18 @@ td, th {
 	var infoitemslists=[];
 	
 	 $(document).ready(function () {
-			$('.item').click(function(){
-				console.log($(this));
-			});
+		 clicklievent();
      });
+	 function clicklievent(){
+			$('.item').click(function(){
+				$('#shopname').text($(this).find('div.info h5').text());
+				$('#foodmenuitem').text($('#keyword')[0].value);
+				$('#whereaddress').text($(this).find('div.info span.adn').text());
+				console.log($(this).find('div.info span.jibun gray'));
+			}); 
+	 }
+	 
+	 
 	// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	function addMarker(position, idx, title) {
 		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
