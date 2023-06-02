@@ -253,12 +253,24 @@ td, th {
 						</tr>
 						<tr>
 								<td class="eatclickbox">
-										<div id="goeat" class="btn btn-info">점심 먹으러 가기!</div>
+										<form action="" method="">
+												<div id="goeat" class="btn btn btn-primary">
+														<input type="submit" value="점심먹으러 가요!" /> 
+														
+
+												</div>
+												<div onclick="showgenderman()" id="showgenderman" style="width:40px" class="hidden">남</div>
+												<div onclick="showgenderwom()" id="showgenderwom" style="width:40px" class="hidden">여</div>
+												<div onclick="changeage()" id="showage" style="width:40px" class="btn btn-outline btn-success">age</div>
+												<input type="hidden" value="" />
+										</form>
 								</td>
 						</tr>
 						<tr>
 								<td class="eatclickbox">
-										<div id="goeattogether" class="btn btn-info">여러명이서 먹어요!</div>
+										<div id="goeattogether" class="btn btn btn-primary">여러명이서 먹어요!</div>
+										<div onclick="creategenderman()" id="creategenderman" style="width:40px" class="btn btn-outline btn-info">남</div>
+										<div onclick="creategenderwom()" id="creategenderwom" style="width:40px" class="btn btn-outline btn-error">여</div>
 								</td>
 						</tr>
 
@@ -279,10 +291,40 @@ td, th {
 				<div id="pagination"></div>
 		</div>
 </div>
-
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56df77a2193b126495f95035a4f0197f&libraries=services"></script>
 <script>
+//	show gender and bind value
+$(document).ready(function(){
+	if('${rq.loginedMember.usergender }'=='' || '${rq.loginedMember.usergender }'=='남'){
+		showgenderwom();
+	}else{
+		showgenderman();
+	}
+	 //typeof variable !== 'undefined'
+})
+//	show age
+function changeage(){
+	var agearray=['10대','20대','30대','40대','50대','60+'];
+	if(agearray.includes($('#showage').text())){
+		$('#showage').text(agearray[(agearray.indexOf($('#showage').text())+1)%6]);
+	}else{
+		$('#showage').text('10대');
+	}
+}
+
+function creategenderman(){
+	var div = document.createElement("div");
+}
+
+function showgenderman(){
+	$('#showgenderwom').attr('class',"btn btn-error");
+	$('#showgenderman').attr('class',"hidden");
+}
+function showgenderwom(){
+	$('#showgenderwom').attr('class',"hidden");
+	$('#showgenderman').attr('class',"btn btn-info");
+}
 	
 	var myaddress_name;
 	$(document).ready(function() {

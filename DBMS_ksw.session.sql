@@ -49,9 +49,9 @@ CREATE TABLE `member` (
 INSERT INTO `member` ( userid, userpw, username, location, userage, usergender,
    useremail, `authLevel`, nickname, cellphoneNum )
 VALUES 
-('test1', 'test1', '홍길동', 'test1', 25 , '남', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
-('test2', 'test2', '임꺽정', 'test2', 35 , '남', 'lgj992@hanmail.net',3,'회원2','01043214321'),
-('test3', 'test3', '심사임', 'test3', 45 , '여', 'llmom44@lycos.com',3,'회원3','01011112222');
+('test1', 'test1', '홍길동', 'test1', 25 , 'man', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
+('test2', 'test2', '임꺽정', 'test2', 35 , 'man', 'lgj992@hanmail.net',3,'회원2','01043214321'),
+('test3', 'test3', '심사임', 'test3', 45 , 'woman', 'llmom44@lycos.com',3,'회원3','01011112222');
 
 CREATE TABLE `foodtype` (
 id INT(11) NOT NULL AUTO_INCREMENT,
