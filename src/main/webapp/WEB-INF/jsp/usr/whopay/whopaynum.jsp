@@ -3,13 +3,8 @@
 
 <section class="flex justify-around">
 		<c:forEach begin="1" end="${getpeople }" var="i">
-				<div>
+				<div style="width: 150px;">
 						<table class='table'>
-								<tr>
-										<td>
-												<div id="<c:out value = "${i}"/>">as</div>
-										</td>
-								</tr>
 								<tr>
 										<td>
 												<div>
@@ -19,32 +14,26 @@
 								</tr>
 								<tr>
 										<td>
-												<div>
-														<input class="${i}" type="text" value="제육볶음" name="menu" />
+												<div class="text-center">
+													<div id="${i }this" >당첨?</div>
+												</div>
+										</td>
+								</tr>
+								<tr>
+										<td>
+												<div class="text-center">
+													<div id="${i }pokename" class="btn btn-outline btn-info  ${i}">안녕</div>
 												</div>
 										</td>
 								</tr>
 								<tr>
 										<td>
 												<div>
-														<input class="${i}" type="text" value="man" name="gender" />
+													<img id="${i}img" src="" alt="" />
 												</div>
 										</td>
 								</tr>
-								<tr>
-										<td>
-												<div>
-													<img id="${i }" src="" alt="" />
-												</div>
-										</td>
-								</tr>
-								<tr>
-										<td>
-												<div>
-														<input class="${i}" type="text" value="33" name="age" />
-												</div>
-										</td>
-								</tr>
+
 
 								<!-- <form onsubmit="confirmclick; return false;"> -->
 

@@ -47,7 +47,7 @@ table {
 
 <div></div>
 <div id="content"></div>
-<div id="confirm"></div>
+<div id="confirm" class="hidden"></div>
 <div id="choice"></div>
 <div class="text-center">
 	<button id="start" class="hidden"
@@ -88,9 +88,11 @@ var randompictureindex;
 				contentType: 'text/html; charset=utf-8',
 				success: function (v) {
 					$('#content').html(v);
-					for(var i=0; i<parseInt($('#num').val()); i++){
-						console.log(i);
-					}
+						for(var i=1; i-1<parseInt($('#num').val()); i++){
+							$('#'+i+'img').attr('src',pokeimage[randompictureindex[i]]);
+							$('#'+i+'pokename').text(pokeimage[randompictureindex[i]].substring(1))
+						}	
+					
 				}
 			});
 		});
@@ -130,7 +132,7 @@ var randompictureindex;
 			$('#start').click(function loop() {
 				var choice = Math.floor(Math.random() * 8);
 				random.pop();
-				$("#" + (random.length % parseInt($('#num').val()) + 1)).css('background-color', 'red');
+				$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css('background-color', 'rgb(280,87,87)');
 				setTimeout(
 					function () {
 						setTimeout(
@@ -138,7 +140,7 @@ var randompictureindex;
 								if (random.length == parseInt(choice)) {
 									return;
 								}
-							 	$("#" + (random.length % parseInt($('#num').val()) + 1)).css(
+							 	$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css(
 									'background-color', 'white');
 							}, 50);
 						$('#confirm').html(random.length);
