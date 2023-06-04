@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.sw.demo.service.MemberService;
@@ -72,6 +73,11 @@ public class TestController {
 		return "usr/practice/txt";
 	}
 	
+	@RequestMapping(value="/ex/practice", method= RequestMethod.GET)
+	@ResponseBody
+	public String getFoosBySimplePath() {
+		return "Hello worlds";
+	}
 
 //despite no requestservlet, with postmethod controller can manage input data 
 //	@RequestMapping("/usr/practice/postexample")

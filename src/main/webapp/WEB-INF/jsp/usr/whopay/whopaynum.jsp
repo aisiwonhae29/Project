@@ -20,20 +20,6 @@
 								<tr>
 										<td>
 												<div>
-														<input class="${i}" type="text" value="23/05/13" name="date" />
-												</div>
-										</td>
-								</tr>
-								<tr>
-										<td>
-												<div>
-														<input class="${i}" type="text" value="월평동" name="location" />
-												</div>
-										</td>
-								</tr>
-								<tr>
-										<td>
-												<div>
 														<input class="${i}" type="text" value="제육볶음" name="menu" />
 												</div>
 										</td>
@@ -42,6 +28,13 @@
 										<td>
 												<div>
 														<input class="${i}" type="text" value="man" name="gender" />
+												</div>
+										</td>
+								</tr>
+								<tr>
+										<td>
+												<div>
+													<img id="${i }" src="" alt="" />
 												</div>
 										</td>
 								</tr>
@@ -65,17 +58,17 @@
 		
 		$(document).ready(
 				function(){
-				 $('#confirmData').click(function(){
-					var array=[];
-					$('.'+${i}).each(function(){
-						var key=$(this).attr('name');
-						var value=$(this).val().trim();
-						var map={};
-						map[key]=value;
-						array.push(map);
-						
-					 });
-					eatmember.push(array);
+					
+				 	$('#confirmData').click(function(){
+						var array=[];
+						$('.'+${i}).each(function(){
+							var key=$(this).attr('name');
+							var value=$(this).val().trim();
+							var map={};
+							map[key]=value;
+							array.push(map);
+					 	});
+						eatmember.push(array);
 					 }) 
 				
 				})

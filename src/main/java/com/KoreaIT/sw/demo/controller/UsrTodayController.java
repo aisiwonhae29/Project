@@ -63,8 +63,9 @@ public class UsrTodayController {
 	}
 
 	@RequestMapping("/usr/today/whopaynum")
-	public String whopaynum(String number,Model model) {
+	public String whopaynum(String number,String array, Model model) {
 		model.addAttribute("getpeople", number);
+		model.addAttribute("array", array);
 		return "usr/whopay/whopaynum";
 	}
 

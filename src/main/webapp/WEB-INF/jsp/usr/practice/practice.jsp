@@ -31,6 +31,7 @@
 <img src="${pageContext.request.contextPath}/static/${java.net.URLEncoder.encode('gora.png', 'UTF-8')}" alt="Your Image">
 <hr />
 <button onclick="testajax()">testajax</button>
+<button> a[href=]</button>
 <script>
 	function testajax(){
 	    $.ajax({
