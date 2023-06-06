@@ -48,6 +48,17 @@ public interface TodayRepository {
 			SELECT * FROM menu
 			""")
 	List<menu> getMenuLists();
+	
+	@Insert("""
+			INSERT INTO todayeat
+			SET shopname='${shopname}',
+			menuname='${menuname}',
+			location='${location}',
+			usergender='${usergender}',
+			`date`=NOW(),
+			userage=${userage};
+			""")
+	void writeeat(String shopname, String menuname, String location, String usergender, int userage);
 }
 /*
  * @Insert(

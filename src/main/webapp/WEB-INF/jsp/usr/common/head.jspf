@@ -4,11 +4,9 @@
 <html data-theme="bumblebee">
 <head>
 <script>
-var Location = null;
-var myLatitude;
-var myLongitude;
-
-
+	var Location = null;
+	var myLatitude;
+	var myLongitude;
 </script>
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
@@ -32,13 +30,6 @@ var myLongitude;
 <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-header {
-	src: url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-	font-family: "Hi Melody", cursive;
-}
-#topbar>ol>li:hover>ol{
-	display: block;
-}
 </style>
 </head>
 <body>
@@ -64,26 +55,25 @@ header {
 								<li>
 										<a href="/usr/today/store">가게</a>
 								</li>
-								<li class="relative">
+								<li class="menubar relative">
 										<a href="#">이야깃거리</a>
-										<ol class="writeBox hidden absolute top-full left-1/2 transform -translate-x-1/2 mt-3">
-														<li class="hover:underline">
-																<a href="/usr/article/list?boardId=1">NOTICE</a>
-														</li>
-														<li class="hover:underline">
-																<a href="/usr/article/list?boardId=2">FREE</a>
-														</li>
-														<li class="hover:underline">
-																<a href="/usr/article/list?boardId=3">QnA</a>
-														</li>
-														<li class="hover:underline">
-																<a href="/usr/article/write">write</a>
-														</li>
-
-
+										<ol class="writeBox top-full left-1/2 transform -translate-x-1/2 w-full text-center mt-3 z-10">
+												<li class="hover:underline bg-white">
+														<a href="/usr/article/list?boardId=1">NOTICE</a>
+												</li>
+												<li class="hover:underline">
+														<a href="/usr/article/list?boardId=2">FREE</a>
+												</li>
+												<li class="hover:underline">
+														<a href="/usr/article/list?boardId=3">QnA</a>
+												</li>
+												<li class="hover:underline">
+														<a href="/usr/article/write">write</a>
+												</li>
 										</ol>
 								</li>
-								<li>
+
+								<li class="hidden">
 										<a href="/usr/practice/practice ">PMP</a>
 								</li>
 						</ol>

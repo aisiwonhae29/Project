@@ -1,6 +1,7 @@
 package com.KoreaIT.sw.demo.vo;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,8 @@ public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
+	
+	private Map<String, String> paramMap;
 	
 	public Rq(HttpServletRequest req, HttpServletResponse resp,
 			MemberService memberService) {
@@ -90,6 +93,39 @@ public class Rq {
 	}
 	public boolean isNotLogined() {
 		return !isLogined;
+	}
+	public String getLoginUri() {
+		return "/usr/member/login?afterLoginUri=" + getAfterLoginUri();
+	}
+
+	public String getLogoutUri() {
+		String requestUri = req.getRequestURI();
+
+		switch (requestUri) {
+		case "/usr/article/write":
+			return "../member/doLogout?afterLogoutUri=" + "/";
+		case "/adm/member/list":
+			return "../member/doLogout?afterLogoutUri=" + "/";
+		}
+
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}
+	public String getAfterLogoutUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getAfterLoginUri() {
+//		로그인 후 접근 불가 페이지
+
+		String requestUri = req.getRequestURI();
+
+		switch (requestUri) {
+		case "/usr/member/login":
+		case "/usr/member/join":
+			return Ut.getEncodedUri(Ut.getAttr(paramMap, "afterLoginUri", ""));
+		}
+
+		return getEncodedCurrentUri();
 	}
 	public String jsHitoryBackOnView(String msg) {
 		req.setAttribute("msg", msg);

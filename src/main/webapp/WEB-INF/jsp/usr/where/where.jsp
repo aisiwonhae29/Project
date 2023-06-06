@@ -198,8 +198,11 @@ td, th {
 	height: 80px;
 }
 
-#goeat, #goeattogether {
+#goeat  {
 	width: 200px;
+}
+#goeattogether{
+	width: 155px;
 }
 
 #mapinfovaluebox {
@@ -253,27 +256,47 @@ td, th {
 						</tr>
 						<tr>
 								<td class="eatclickbox">
-										<form action="" method="">
-												<div id="goeat" class="btn btn btn-primary">
-														<input type="submit" value="점심먹으러 가요!" /> 
-														
-
-												</div>
-												<div onclick="showgenderman()" id="showgenderman" style="width:40px" class="hidden">남</div>
-												<div onclick="showgenderwom()" id="showgenderwom" style="width:40px" class="hidden">여</div>
-												<div onclick="changeage()" id="showage" style="width:40px" class="btn btn-outline btn-success">age</div>
-												<input type="hidden" value="" />
+										<form action="/usr/today/doEat" method="POST">
+												<button onclick="return verifydata()" type="submit" id="goeat" class="btn btn btn-primary">점심먹으러 가요!</button>
+												<div onclick="showgenderman()" id="showgenderman" style="width: 40px" class="hidden">남</div>
+												<div onclick="showgenderwom()" id="showgenderwom" style="width: 40px" class="hidden">여</div>
+												<div onclick="changeage(this)" id="showage" style="width: 40px" class="btn btn-outline btn-success">age</div>
+												<input id="jasondata" type="hidden" value="" name="JSON" />
+												<div class=""></div>
+												<script>
+												function JSONMaker(){
+													
+													var JSONString=JSON.stringify(JSONArray);
+													$('#jasondata').attr('value',JSONString);
+												}
+												</script>
 										</form>
 								</td>
 						</tr>
 						<tr>
 								<td class="eatclickbox">
-										<div id="goeattogether" class="btn btn btn-primary">여러명이서 먹어요!</div>
-										<div onclick="creategenderman()" id="creategenderman" style="width:40px" class="btn btn-outline btn-info">남</div>
-										<div onclick="creategenderwom()" id="creategenderwom" style="width:40px" class="btn btn-outline btn-error">여</div>
+								<form action="/usr/today/doEats" method="POST">
+										<button id="goeattogether" class="btn btn btn-primary">여러명이서 먹어요!</button>
+										<div onclick="creategenderman()" id="creategenderman" style="width: 40px" class="btn btn-outline btn-info">남</div>
+										<div onclick="creategenderwom()" id="creategenderwom" style="width: 40px" class="btn btn-outline btn-error">여</div>
+										<div onclick="recrearray()" id="recrearray" style="width: 40px" class="btn btn-outline btn-success">다시</div>
+										<input id="eatsJSONdata" type="text" value="" />
+										<input id="eatplace" type="text" value="" name="placedata"/>
+										<script> 
+											var aj='[["asd","asd","FFff","asdasd"],["sdfsdf","sdfsdf","sdfsdf","sdf"]]';
+											function jj(){
+												$('#eatsJSONdata').attr('value',aj);
+											}
+										</script>
+										</td></tr>
+										<tr><td>
+										<div id="blocplace"></div>
+								</form>
 								</td>
 						</tr>
-
+						<tr>
+							<td><button onclick="jj()">button jj</button></td>
+						</tr>
 				</table>
 		</div>
 		<div id="menu_wrap" class="bg_white">
@@ -294,36 +317,151 @@ td, th {
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56df77a2193b126495f95035a4f0197f&libraries=services"></script>
 <script>
+function verifydata(){
+	if(JSONArray.length<5){
+		return false;
+		alert('모든조건을 골라주세요~');
+	}else{
+		return true;
+	}
+	
+}
 //	show gender and bind value
+var JSONArray=[];
 $(document).ready(function(){
+	 
 	if('${rq.loginedMember.usergender }'=='' || '${rq.loginedMember.usergender }'=='남'){
 		showgenderwom();
 	}else{
 		showgenderman();
 	}
 	 //typeof variable !== 'undefined'
+	
 })
 //	show age
-function changeage(){
+function changeage(el){
 	var agearray=['10대','20대','30대','40대','50대','60+'];
 	if(agearray.includes($('#showage').text())){
-		$('#showage').text(agearray[(agearray.indexOf($('#showage').text())+1)%6]);
+		$(el).text(agearray[(agearray.indexOf($(el).text())+1)%6]);
 	}else{
-		$('#showage').text('10대');
+		$(el).text('10대');
 	}
+	if(JSONArray.length>0){
+	JSONArray.pop();
+	}
+	$('#jasondata').attr('value',JSONArray);
+	JSONArray.push($('#showage').text().substring(0,2));
+	console.log(JSONArray);
+	$('#jasondata').attr('value',JSONArray);
 }
-
+//peoples control
+var JSONArray2 = [];
+var JSONArray2people = [];
+function changeages(el){
+	JSONArray2people = [];
+	var agearray=['10대','20대','30대','40대','50대','60+'];
+	if(agearray.includes($(el).text())){
+		$(el).text(agearray[(agearray.indexOf($(el).text())+1)%6]);
+	}else{
+		$(el).text('10대');
+	}
+	var elements1=Array.from($(".peoplenumber"));
+	textContents = elements1.map(function(element) {
+		return element.textContent;
+		}
+	);
+	
+}
+var textContents;
+var createarray=[0];
+function recrearray(){
+	eatpeoples=[];
+	createarray=[0];
+}
+function createarraychk(){
+	var arnum=createarray.length;
+	if(createarray.length>8){
+		alert('8명 이상은 안되요 ㅠ');
+		return false;
+	}else{
+		createarray.push(createarray[arnum-1]+1);
+		return arnum;	
+	}
+	
+}
+var eatpeoples=[];
 function creategenderman(){
+	var crenum=createarraychk();
+	
+	if(crenum==false){
+		return false;
+	}
+	console.log(crenum);
 	var div = document.createElement("div");
+	div.setAttribute("id", "peoplesplace"+crenum);
+	div.setAttribute("onclick", "changeages(this)");
+	div.classList.add("btn"); div.classList.add("btn-outline"); 
+	div.classList.add("btn-info");
+	div.classList.add("w-10");
+	div.classList.add("peoplenumber");
+	var nod = document.createTextNode('age');
+	div.appendChild(nod);
+	$(div).insertBefore($('#blocplace')[0]);
+	
+}
+function creategenderwom(){
+	var crenum=createarraychk();
+	if(crenum==false){
+		return false;
+	}
+	var div = document.createElement("div");
+	div.setAttribute("id", "peoplesplace"+crenum);
+	div.setAttribute("onclick", "changeages(this)");
+	div.classList.add("btn"); div.classList.add("btn-outline"); div.classList.add("btn-error");div.classList.add("w-10");
+	var nod = document.createTextNode('age');
+	div.appendChild(nod);
+	$(div).insertBefore($('#blocplace')[0]);
+}
+function aaa(){
+	alert('asdasd');
 }
 
 function showgenderman(){
+ 	if(!JSONArray.includes('남') && JSONArray.length==0){
+		JSONArray.push('여');
+	}else if(!JSONArray.includes('남')&&JSONArray.length==1){
+		JSONArray.splice(0, 0, '여');
+	}else if(JSONArray.includes('남')&&JSONArray.length==1){
+		JSONArray.splice(0, 1, '여');
+	}else if(JSONArray.includes('남')&&JSONArray.length==2){
+		JSONArray.splice(0, 1, '여');
+	}else{
+		JSONArray.splice(3, 1, '여');
+	}
 	$('#showgenderwom').attr('class',"btn btn-error");
 	$('#showgenderman').attr('class',"hidden");
+	$('#jasondata').attr('value',JSONArray);
 }
 function showgenderwom(){
+	if(!JSONArray.includes('여') && JSONArray.length==0){
+		JSONArray.push('남');
+	}else if(!JSONArray.includes('여')&&JSONArray.length==1){
+		JSONArray.splice(0, 0, '남');
+	}else if(JSONArray.includes('여')&&JSONArray.length==1){
+		JSONArray.splice(0, 1, '남');
+	}else if(JSONArray.includes('여')&&JSONArray.length==2){
+		JSONArray.splice(0, 1, '남');
+	}else{
+		JSONArray.splice(3, 1, '남');
+	}
 	$('#showgenderwom').attr('class',"hidden");
 	$('#showgenderman').attr('class',"btn btn-info");
+	$('#jasondata').text(JSONArray);
+}
+function Arraygenderchange(){
+	if(JSONArray.length=0){
+		
+	}
 }
 	
 	var myaddress_name;
@@ -394,7 +532,10 @@ function showgenderwom(){
 			alert('키워드를 입력해주세요!');
 			return false;
 		}
-
+		   setTimeout(()=>{
+		    	clicklievent();	
+		    }, 400);
+			
 		// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 		ps.keywordSearch(keyword, placesSearchCB, {
 			x : mylongitude,
@@ -558,10 +699,28 @@ function showgenderwom(){
      });
 	 function clicklievent(){
 			$('.item').click(function(){
+				JSONArray=[];
+				JSONArray2=[];
 				$('#shopname').text($(this).find('div.info h5').text());
 				$('#foodmenuitem').text($('#keyword')[0].value);
 				$('#whereaddress').text($(this).find('div.info span.adn').text());
 				console.log($(this).find('div.info span.jibun gray'));
+				
+				JSONArray.push($(this).find('div.info h5').text());
+				JSONArray.push($('#keyword')[0].value);
+				JSONArray.push($(this).find('div.info span.adn').text().split(" ")[2]);
+				
+				JSONArray2.push($(this).find('div.info h5').text());
+				JSONArray2.push($('#keyword')[0].value);
+				JSONArray2.push($(this).find('div.info span.adn').text().split(" ")[2]);
+				
+				if($('#showgenderman').attr('class')=='hidden'){
+					JSONArray.push('여');	
+				}else{
+					JSONArray.push('남');
+				}
+				$('#eatplace').attr('value',JSONArray2);
+				JSONArray.push($('#showage').text().substring(0,2));
 			}); 
 	 }
 	 

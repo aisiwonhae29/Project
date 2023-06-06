@@ -1,8 +1,6 @@
 package com.KoreaIT.sw.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +13,16 @@ import com.KoreaIT.sw.demo.service.TodayService;
 import com.KoreaIT.sw.demo.util.Ut;
 import com.KoreaIT.sw.demo.vo.menu;
 import com.KoreaIT.sw.demo.vo.todayeat;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class UsrTodayController {
-
+	
+	ObjectMapper objectMapper = new ObjectMapper();
+	
 	@Autowired
 	private TodayService todayService;
 
@@ -32,16 +36,37 @@ public class UsrTodayController {
 	public String whopay() {
 		return "usr/whopay/whopay";
 	}
-
+//'광천식당', '맛집', '선화동', '남', '20대']
 	@RequestMapping("/usr/today/doEat")
 	@ResponseBody
-	public String doEat(ArrayList<Map<String, Object>> eatmembers) {
-		String date;
-		String location;
-		String menu;
-		String usergender;
-		int userage;
-		return "usr/whopay/~!~!";
+	public Object doEat(String JSON) throws JsonMappingException, JsonProcessingException {
+		
+		 String[] array = JSON.split(","); 
+		 String shopname =	 array[0];
+		 String menuname =	 array[1];
+		 String location =	 array[2];
+		 String usergender=	 array[3];
+		 int userage = Integer.parseInt(array[4]);
+		 
+		 todayService.writeeat(shopname, menuname, location, usergender, userage);
+		 
+		return array[0] + "/"+array[2];
+	}
+	
+	@RequestMapping("/usr/today/doEats")
+	@ResponseBody
+	public Object doEats(String JSON) throws JsonMappingException, JsonProcessingException {
+		
+		 String[] array = JSON.split(","); 
+		 String shopname =	 array[0];
+		 String menuname =	 array[1];
+		 String location =	 array[2];
+		 String usergender=	 array[3];
+		 int userage = Integer.parseInt(array[4]);
+		 
+		 todayService.writeeat(shopname, menuname, location, usergender, userage);
+		 
+		return array[0] + "/"+array[2];
 	}
 
 	@RequestMapping("/usr/today/getRankList")

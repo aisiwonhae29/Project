@@ -18,3 +18,26 @@
   width: 80%;
   background-color: rgb(250, 87, 87);
 }
+header {
+	src: url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+	font-family: "Hi Melody", cursive;
+}
+
+.menubar {
+	position: relative;
+}
+
+.menubar>ol {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.menubar:hover>ol {
+	display: block;
+}
+#topbar>ol>li>ol>li>a {
+	display: block;
+}

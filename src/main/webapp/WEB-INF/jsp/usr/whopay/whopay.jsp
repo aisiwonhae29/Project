@@ -53,7 +53,9 @@ table {
 	<button id="start" class="hidden"
 		style="width: 200px; height: 100px;">돌려돌려돌림판~</button>
 </div>
-<a href="../"></a>
+<div>
+	
+</div>
 <script>
 	var pokeimage=['/고라파덕','/꼬부기','/냐옹이','/뮤','/브케인','/이브이','/이상해씨','/치코리타','/토게피','/파이리','/푸린'];
 	var eatmember = [];
@@ -114,7 +116,7 @@ var randompictureindex;
 				$('#1').css('background-color', 'red');
 			})
 			
-			$('#start').click(function () {
+			/* $('#start').click(function () {
 				$.ajax({
 					url: '/usr/today/doEat',
 					type: 'POST',
@@ -127,7 +129,7 @@ var randompictureindex;
 						console.error(error);
 					}
 				})
-			})
+			}) */
 			
 			$('#start').click(function loop() {
 				var choice = Math.floor(Math.random() * 8);

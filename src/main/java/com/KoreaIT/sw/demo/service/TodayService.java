@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.KoreaIT.sw.demo.repository.TodayRepository;
+import com.KoreaIT.sw.demo.vo.ResultData;
 import com.KoreaIT.sw.demo.vo.menu;
 import com.KoreaIT.sw.demo.vo.todayeat;
 
@@ -68,9 +69,14 @@ public class TodayService {
 	public String test1(String el1) {
 		return el1;
 	}
-
+	
+	
 	public List<menu> getmenuLists() {
 		List<menu> menuLists = todayRepository.getMenuLists();
 		return menuLists;
+	}
+
+	public void writeeat(String shopname, String menuname, String location, String usergender, int userage) {
+		todayRepository.writeeat(shopname, menuname, location, usergender, userage);
 	}
 }
