@@ -276,12 +276,13 @@ td, th {
 						<tr>
 								<td class="eatclickbox">
 								<form action="/usr/today/doEats" method="POST">
-										<button id="goeattogether" class="btn btn btn-primary">여러명이서 먹어요!</button>
+										<button onclick="return verifydatas()" id="goeattogether" class="btn btn btn-primary">여러명이서 먹어요!</button>
 										<div onclick="creategenderman()" id="creategenderman" style="width: 40px" class="btn btn-outline btn-info">남</div>
 										<div onclick="creategenderwom()" id="creategenderwom" style="width: 40px" class="btn btn-outline btn-error">여</div>
 										<div onclick="recrearray()" id="recrearray" style="width: 40px" class="btn btn-outline btn-success">다시</div>
-										<input id="eatsJSONdata" type="text" value="" />
-										<input id="eatplace" type="text" value="" name="placedata"/>
+										<input id="eatsJSONdata" type="hidden" value="" name="peopleage" />
+										<input id="eatplace" type="hidden" value="" name="placedata"/>
+										<input type="hidden" id="eatgender" name="eatgender" value="" />
 										<script> 
 											var aj='[["asd","asd","FFff","asdasd"],["sdfsdf","sdfsdf","sdfsdf","sdf"]]';
 											function jj(){
@@ -294,9 +295,9 @@ td, th {
 								</form>
 								</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td><button onclick="jj()">button jj</button></td>
-						</tr>
+						</tr> -->
 				</table>
 		</div>
 		<div id="menu_wrap" class="bg_white">
@@ -319,12 +320,24 @@ td, th {
 <script>
 function verifydata(){
 	if(JSONArray.length<5){
-		return false;
 		alert('모든조건을 골라주세요~');
+		return false;
 	}else{
 		return true;
 	}
+}
+function verifydatas(){
+	if($('#eatsJSONdata').attr('value').includes('age') || $('#eatsJSONdata').attr('value').length<3){
+		alert('나이를 입력해주세요');
+		return false;
+	}
 	
+	if($('#eatplace').attr('value').length<2){
+		alert('장소를 골라주세요');
+		return false;
+	}
+	
+	return true;
 }
 //	show gender and bind value
 var JSONArray=[];
@@ -354,29 +367,35 @@ function changeage(el){
 	console.log(JSONArray);
 	$('#jasondata').attr('value',JSONArray);
 }
+
 //peoples control
+var peoplevar="";
 var JSONArray2 = [];
 var JSONArray2people = [];
 function changeages(el){
-	JSONArray2people = [];
+	peoplevar="";
 	var agearray=['10대','20대','30대','40대','50대','60+'];
 	if(agearray.includes($(el).text())){
 		$(el).text(agearray[(agearray.indexOf($(el).text())+1)%6]);
 	}else{
 		$(el).text('10대');
 	}
-	var elements1=Array.from($(".peoplenumber"));
+	var peoplevarmaker = $(".peoplenumber").each(function () {
+	peoplevar= peoplevar+ $(this).text(); // use .html() if you actually want the html
+	$('#eatsJSONdata').attr('value',peoplevar);
+	});
+/* 	var elements1=Array.from($(".peoplenumber"));
 	textContents = elements1.map(function(element) {
 		return element.textContent;
 		}
-	);
-	
+	); */
 }
 var textContents;
 var createarray=[0];
 function recrearray(){
 	eatpeoples=[];
 	createarray=[0];
+	$('.peoplenumber').remove();
 }
 function createarraychk(){
 	var arnum=createarray.length;
@@ -392,7 +411,7 @@ function createarraychk(){
 var eatpeoples=[];
 function creategenderman(){
 	var crenum=createarraychk();
-	
+	JSONArray2people=[];
 	if(crenum==false){
 		return false;
 	}
@@ -408,19 +427,41 @@ function creategenderman(){
 	div.appendChild(nod);
 	$(div).insertBefore($('#blocplace')[0]);
 	
+	$('.peoplenumber').each(function() {
+		  if ($(this).hasClass('btn-error')) {
+			  JSONArray2people.push('여');
+			  $('#eatgender').attr('value',JSONArray2people);
+		  } else {
+			  JSONArray2people.push('남');
+			  $('#eatgender').attr('value',JSONArray2people);
+		  }
+		});
 }
 function creategenderwom(){
 	var crenum=createarraychk();
+	JSONArray2people=[];
 	if(crenum==false){
 		return false;
 	}
 	var div = document.createElement("div");
 	div.setAttribute("id", "peoplesplace"+crenum);
 	div.setAttribute("onclick", "changeages(this)");
-	div.classList.add("btn"); div.classList.add("btn-outline"); div.classList.add("btn-error");div.classList.add("w-10");
+	div.classList.add("btn"); div.classList.add("btn-outline"); 
+	div.classList.add("btn-error");
+	div.classList.add("w-10");
+	div.classList.add("peoplenumber");
 	var nod = document.createTextNode('age');
 	div.appendChild(nod);
 	$(div).insertBefore($('#blocplace')[0]);
+	$('.peoplenumber').each(function() {
+		  if ($(this).hasClass('btn-error')) {
+			  JSONArray2people.push('여');
+			  $('#eatgender').attr('value',JSONArray2people);
+		  } else {
+			  JSONArray2people.push('남');
+			  $('#eatgender').attr('value',JSONArray2people);
+		  }
+		});
 }
 function aaa(){
 	alert('asdasd');

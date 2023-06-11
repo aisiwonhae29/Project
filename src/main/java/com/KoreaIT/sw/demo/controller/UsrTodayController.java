@@ -55,18 +55,16 @@ public class UsrTodayController {
 	
 	@RequestMapping("/usr/today/doEats")
 	@ResponseBody
-	public Object doEats(String JSON) throws JsonMappingException, JsonProcessingException {
-		
-		 String[] array = JSON.split(","); 
-		 String shopname =	 array[0];
-		 String menuname =	 array[1];
-		 String location =	 array[2];
-		 String usergender=	 array[3];
-		 int userage = Integer.parseInt(array[4]);
-		 
-		 todayService.writeeat(shopname, menuname, location, usergender, userage);
-		 
-		return array[0] + "/"+array[2];
+	public Object doEats(String peopleage, String placedata, String eatgender ) throws JsonMappingException, JsonProcessingException {
+		String[] userages = peopleage.split("대");
+		String[] usergenders = eatgender.split(",");
+		String[] locations = placedata.split(",");
+		int index = userages.length;
+		for(int i=0; i<index; i++) {
+//			showresult+="["+userages[i]+","+usergenders[i]+","+locations[0]+"]";
+			todayService.writeeat(locations[0],locations[1],locations[2],usergenders[i],Integer.parseInt(userages[i]));
+		}
+		return "success";
 	}
 
 	@RequestMapping("/usr/today/getRankList")

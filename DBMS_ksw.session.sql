@@ -49,9 +49,9 @@ CREATE TABLE `member` (
 INSERT INTO `member` ( userid, userpw, username, location, userage, usergender,
    useremail, `authLevel`, nickname, cellphoneNum )
 VALUES 
-('test1', 'test1', '홍길동', 'test1', 25 , 'man', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
-('test2', 'test2', '임꺽정', 'test2', 35 , 'man', 'lgj992@hanmail.net',3,'회원2','01043214321'),
-('test3', 'test3', '심사임', 'test3', 45 , 'woman', 'llmom44@lycos.com',3,'회원3','01011112222');
+('test1', 'test1', '홍길동', 'test1', 25 , '남', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
+('test2', 'test2', '임꺽정', 'test2', 35 , '남', 'lgj992@hanmail.net',3,'회원2','01043214321'),
+('test3', 'test3', '심사임', 'test3', 45 , '여', 'llmom44@lycos.com',3,'회원3','01011112222');
 
 CREATE TABLE `foodtype` (
 id INT(11) NOT NULL AUTO_INCREMENT,
@@ -90,6 +90,8 @@ VALUES ('닭갈비',1), ('칼국수',1), ('제육볶음',1),('삼계탕',1),('�
 
 INSERT INTO menu (menuname, foodtype)
 VALUES ('쌀국수',5), ('라면',6), ('떡볶이',6), ('까르보나라',3), ('김치찌개',1), ('된장찌개',1), ('순대국',1), ('감자탕',1);
+
+SELECT * FROM menu;
 ## eat page set constraint
 
 #VALUES('1한식'),('2중식'),('3양식'),('4일식'),('5동남아'),('6분식'),('7기타');
@@ -97,7 +99,7 @@ VALUES ('쌀국수',5), ('라면',6), ('떡볶이',6), ('까르보나라',3), ('
 SELECT * FROM `todayeat` WHERE usergender = '남';
 
 SELECT * FROM `todayeat` 
-WHERE menuname IN(SELECT menuname FROM `menu`, foodtype WHERE menu.foodtype=foodtype.id AND foodtype.foodtype='한식') AND usergender='남'
+WHERE menuname IN(SELECT menuname FROM `menu`, foodtype WHERE menu.foodtype=foodtype.id AND foodtype.foodtype='양식') AND usergender='남'
 GROUP BY menuname
 ORDER BY COUNT(*) DESC LIMIT 5;
 
@@ -349,10 +351,6 @@ ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 
 # 댓글 테이블에 인덱스 추가
 ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
 
-# 기존의 회원 비번을 암호화
-UPDATE `member`
-SET loginPw = SHA2(loginPw,256);
-
 # 파일 테이블 추가
 CREATE TABLE genFile (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
@@ -384,19 +382,6 @@ SELECT * FROM `reply`;
 SELECT * FROM `genFile`;
 
 SELECT SHA2('1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014',256);
-
-SELECT R.*, M.nickname AS extra__writer
-				FROM reply AS R
-				LEFT JOIN `member` AS M
-				ON R.memberId = M.id
-				
-EXPLAIN SELECT R.*, M.nickname AS extra__writer
-FROM reply AS R
-LEFT JOIN `member` AS M
-ON R.memberId = M.id
-WHERE R.relTypeCode = 'article'
-AND R.relId = 1
-ORDER BY R.id DESC
 
 SELECT *
 FROM reactionPoint AS RP
@@ -520,17 +505,5 @@ ON A.id = RP.relId AND RP.relTypeCode = 'article'
 GROUP BY A.id
 ORDER BY A.id DESC;
 
-DROP TABLE `test`;
-CREATE TABLE `test`(
-id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-`number` INT(10) NOT NULL
-);
 
-INSERT INTO `test` (`number`)
-VALUES(1),(4),(7),(8),(2),(22),(44),(787),(41),(68),(37),(57),(89),(41),(57);
-INSERT INTO `test` (`number`)
-VALUES(2),(55),(21132),(112),(45),(7411),(527),(513),(63),(87),(77),(274),(14);
-SELECT * FROM `test`;
 
-SELECT * FROM `test` WHERE `number` BETWEEN 10 AND 40 AND id BETWEEN 1 AND 20;
-SELECT * FROM `test` WHERE `number` BETWEEN 1 AND 1000 AND EXISTS (SELECT * FROM `test`WHERE `number` BETWEEN 100 AND 1000);
