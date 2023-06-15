@@ -497,7 +497,7 @@ function showgenderwom(){
 	}
 	$('#showgenderwom').attr('class',"hidden");
 	$('#showgenderman').attr('class',"btn btn-info");
-	$('#jasondata').text(JSONArray);
+	$('#jasondata').attr('value',JSONArray);
 }
 function Arraygenderchange(){
 	if(JSONArray.length=0){
@@ -509,6 +509,8 @@ function Arraygenderchange(){
 	$(document).ready(function() {
 		addressshow();
 	});
+	
+	//html geolocation
 	function changemylocation() {
 		getLocation();
 		setTimeout(function() {
@@ -560,6 +562,7 @@ function Arraygenderchange(){
 	}
 	// ----------------------------------------variable control
 	var query = "칼국수"
+	// 기본위치 성심당 본점
 	var mylongitude = 127.427;
 	var mylatitude = 36.3278;
 	var querydocs;
@@ -585,12 +588,13 @@ function Arraygenderchange(){
 	}
 	setTimeout(() => {
 		kakao.maps.event.addListener(map, 'dragend', function() {        
-		
+			
 		    // 지도 중심좌표를 얻어옵니다 
 		    var latlng = map.getCenter(); 
 		    
 		    mylatitude=latlng.getLat();
 		    mylongitude=latlng.getLng();
+		    addressshow();
 		    var keyword = document.getElementById('keyword').value;
 		    ps.keywordSearch(keyword, placesSearchCB, {
 				x : mylongitude,
@@ -708,7 +712,6 @@ function Arraygenderchange(){
 	// 검색결과 항목을 Element로 반환하는 함수입니다
 	function getListItem(index, places) {
 		
-		window["itemel"+index]= [{"주소":places.address_name},{"가게이름":places.place_name}]
 		
 		
 		var el = document.createElement('li'), itemStr = '<span class="markerbg marker_'
@@ -760,6 +763,7 @@ function Arraygenderchange(){
 				}else{
 					JSONArray.push('남');
 				}
+				$('#jasondata').attr('value',JSONArray);
 				$('#eatplace').attr('value',JSONArray2);
 				JSONArray.push($('#showage').text().substring(0,2));
 			}); 

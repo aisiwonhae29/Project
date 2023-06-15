@@ -61,6 +61,7 @@ table {
 	var eatmember = [];
 	var random = []
 	var cofirm;
+	var peoplenumberrd;
 	function showrandomgame(){
 		$('#start').attr('class','btn btn-active btn-primary text-center');
 	}
@@ -92,7 +93,8 @@ var randompictureindex;
 					$('#content').html(v);
 						for(var i=1; i-1<parseInt($('#num').val()); i++){
 							$('#'+i+'img').attr('src',pokeimage[randompictureindex[i]]);
-							$('#'+i+'pokename').text(pokeimage[randompictureindex[i]].substring(1))
+							$('#'+i+'pokename').text(pokeimage[randompictureindex[i]].substring(1));
+							peoplenumberrd=$('#num').val();
 						}	
 					
 				}
@@ -112,9 +114,9 @@ var randompictureindex;
 	
 	
 			
-			$('#retry').click(function () {
-				$('#1').css('background-color', 'red');
-			})
+	$('#retry').click(function () {
+		$('#1').css('background-color', 'red');
+	})
 			
 			/* $('#start').click(function () {
 				$.ajax({
@@ -131,30 +133,33 @@ var randompictureindex;
 				})
 			}) */
 			
-			$('#start').click(function loop() {
-				var choice = Math.floor(Math.random() * 8);
-				random.pop();
-				$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css('background-color', 'rgb(280,87,87)');
+	$('#start').click(function loop() {
+		var choice = Math.floor(Math.random() * peoplenumberrd);
+		random.pop();
+		$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css('background-color', 'rgb(280,87,87)');
+		setTimeout(
+			function () {
 				setTimeout(
 					function () {
-						setTimeout(
-							function () {
-								if (random.length == parseInt(choice)) {
-									return;
-								}
-							 	$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css(
-									'background-color', 'white');
-							}, 50);
-						$('#confirm').html(random.length);
-						setTimeout(function () {
-							if (random.length > parseInt(choice)) {
-								loop();
-							}
-						}, 50);
-					}, 50)
-				/* $('#'+choice%parseInt($('#num').val()).css('background-color','gold'); */
-				/* $('#1').css('background-color','gold'); */
-			})
+						if (random.length == parseInt(choice)) {
+							return;
+						}
+					 	$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css(
+							'background-color', 'white');
+					}, 50);
+				$('#confirm').html(random.length);
+				setTimeout(function () {
+					if (random.length > parseInt(choice)) {
+						loop();
+					}else{
+						$("#" + (random.length % parseInt($('#num').val()) + 1+"this")).css(
+								'background-color', 'rgb(280,87,87)');
+					}
+				}, 50);
+			}, 50)
+		/* $('#'+choice%parseInt($('#num').val()).css('background-color','gold'); */
+		/* $('#1').css('background-color','gold'); */
+	})
 	/*                 const box = document.createElement("div");
 	 $("div").text("Asdasd");
 	 document.body.appendChild(box); */

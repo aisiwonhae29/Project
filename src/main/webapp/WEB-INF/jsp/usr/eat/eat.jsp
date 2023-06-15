@@ -3,6 +3,10 @@
 <c:set var="pageTitle" value="뭐가맛있지?" />
 <%@ include file="../common/head.jspf"%>
 <style>
+#randomtable{
+	
+	width: 600px;
+}
 #maingrid {
 	display: grid;
 	height: 640px;
@@ -200,8 +204,8 @@ function findWithCondition(element){
 								<tbody>
 										<tr class="menulist">
 												<td class="text-center">1</td>
-												<td>
-														<a rel="rankfoodimg1" id="1stRankval" href="/usr/today/where?menu="></a>
+												<td >
+														<a rel="rankfoodimg1"  id="1stRankval" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>
 										<tr class="menulist">
@@ -254,7 +258,7 @@ function findWithCondition(element){
 						</div>
 				</div>
 				<div id="randombox" class="h-full ">
-						<table class="table w-5/6">
+						<table class="table" id="randomtable">
 								<caption id="ranktitle">
 										<div onclick="randompick()" class="btn btn-outline mb-1">random 뽑기~</div>
 								</caption>
@@ -263,44 +267,44 @@ function findWithCondition(element){
 										<th id="menu" class="text-center">menu</th>
 								</thead>
 								<tbody>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">1</td>
-												<td>
+												<td class="text-center">
 														<a class="child" rel="1randomel" id="1stRankval2" href="/usr/today/where?menu="></a>												</td>
 										</tr>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">2</td>
-												<td>
+												<td class="text-center">
 														<a class="child" rel="2randomel" id="2ndRankval2" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">3</td>
-												<td>
+												<td class="text-center">
 														<a class="child" rel="3randomel" id="3rdRankval2" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">4</td>
-												<td>
-														<a class="child" rel="4randomel" id="4thRankval2" href="/usr/today/where?menu="></a>
+												<td class="text-center">
+														<a class="child " rel="4randomel" id="4thRankval2" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">5</td>
-												<td>
+												<td class="text-center">
 														<a class="child" rel="5randomel" id="5thRankval2" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">6</td>
-												<td>
+												<td class="text-center">
 														<a class="child" rel="6randomel" id="6thRankval2" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>
-										<tr class="menulist">
+										<tr class="menulistrd">
 												<td class="text-center">7</td>
-												<td>
+												<td class="text-center">
 														<a class="child" rel="7randomel" id="7thRankval2" href="/usr/today/where?menu="></a>
 												</td>
 										</tr>

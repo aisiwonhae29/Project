@@ -16,7 +16,7 @@
 			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 
 			if (form.loginPwConfirm.value.length == 0) {
-				alert('비번 확인 써라');
+				alert('비번 확인 해주세요');
 				form.loginPwConfirm.focus();
 				return;
 
@@ -35,19 +35,19 @@
 		form.email.value = form.email.value.trim();
 
 		if (form.name.value.length == 0) {
-			alert('이름 써라');
+			alert('이름 써주세요');
 			form.name.focus();
 			return;
 		}
 
 		if (form.nickname.value.length == 0) {
-			alert('nickname 써라');
+			alert('nickname 써주세요');
 			form.nickname.focus();
 			return;
 		}
 
 		if (form.cellphoneNum.value.length == 0) {
-			alert('cellphoneNum 써라');
+			alert('cellphoneNum 써주세요');
 			form.cellphoneNum.focus();
 			return;
 		}

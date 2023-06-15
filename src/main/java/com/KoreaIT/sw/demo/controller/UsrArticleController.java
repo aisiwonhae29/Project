@@ -36,10 +36,9 @@ public class UsrArticleController {
 	private Rq rq;
 	@Autowired
 	private ReactionPointService reactionPointService;
-
 	@Autowired
 	private GenFileService genFileService;
-
+	
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
@@ -141,7 +140,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doWrite(int boardId, String title, String body, String replaceUri,
 			MultipartRequest multipartRequest) {
-
+		
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("F-1", "제목을 입력해주세요");
 		}

@@ -49,18 +49,18 @@ public class GenFileController {
 		if (genFile == null) {
 			throw new GenFileNotFoundException();
 		}
-
+		
 		String filePath = genFile.getFilePath(genFileDirPath);
-
+		
 		Resource resource = new InputStreamResource(new FileInputStream(filePath));
-
+		
 		// Try to determine file's content type
 		String contentType = request.getServletContext().getMimeType(new File(filePath).getAbsolutePath());
 
 		if (contentType == null) {
 			contentType = "application/octet-stream";
 		}
-
+		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + genFile.getOriginFileName() + "\"")
 				.contentType(MediaType.parseMediaType(contentType)).body(resource);

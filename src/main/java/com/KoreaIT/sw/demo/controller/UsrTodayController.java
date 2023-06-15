@@ -39,7 +39,7 @@ public class UsrTodayController {
 //'광천식당', '맛집', '선화동', '남', '20대']
 	@RequestMapping("/usr/today/doEat")
 	@ResponseBody
-	public Object doEat(String JSON) throws JsonMappingException, JsonProcessingException {
+	public String doEat(String JSON) throws JsonMappingException, JsonProcessingException {
 		
 		 String[] array = JSON.split(","); 
 		 String shopname =	 array[0];
@@ -50,12 +50,12 @@ public class UsrTodayController {
 		 
 		 todayService.writeeat(shopname, menuname, location, usergender, userage);
 		 
-		return array[0] + "/"+array[2];
+		 return "<script>location.replace('../home/main')</script>";
 	}
 	
 	@RequestMapping("/usr/today/doEats")
 	@ResponseBody
-	public Object doEats(String peopleage, String placedata, String eatgender ) throws JsonMappingException, JsonProcessingException {
+	public String doEats(String peopleage, String placedata, String eatgender ) throws JsonMappingException, JsonProcessingException {
 		String[] userages = peopleage.split("대");
 		String[] usergenders = eatgender.split(",");
 		String[] locations = placedata.split(",");
@@ -64,7 +64,7 @@ public class UsrTodayController {
 //			showresult+="["+userages[i]+","+usergenders[i]+","+locations[0]+"]";
 			todayService.writeeat(locations[0],locations[1],locations[2],usergenders[i],Integer.parseInt(userages[i]));
 		}
-		return "success";
+		return "<script>location.replace('../home/main')</script>";
 	}
 
 	@RequestMapping("/usr/today/getRankList")
@@ -111,6 +111,11 @@ public class UsrTodayController {
 		List<menu> menuLists = todayService.getmenuLists();;
 		
 		return menuLists;
+	}
+	
+	@RequestMapping("/usr/today/store")
+	public String showstore() {
+		return "usr/store/store";
 	}
 	
 //	@RequestMapping("/usr/today/aa")
