@@ -32,7 +32,7 @@ SELECT * FROM todayeat;
 CREATE TABLE `member` (
   id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   regDate DATETIME NOT NULL,
-  updateDate DATETIME NOT NULL,
+  updateDate DATETIME NOT NULL DEFAULT NOW(),
   userid CHAR(100) NOT NULL,
   userpw CHAR(150) NOT NULL,
   username CHAR(100) NOT NULL,
@@ -46,12 +46,12 @@ CREATE TABLE `member` (
   delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부 (0=탈퇴 전, 1=탈퇴 후)',
   delDate DATETIME COMMENT '탈퇴 날짜'
 );
-INSERT INTO `member` ( userid, userpw, username, location, userage, usergender,
+INSERT INTO `member` ( regDate, updateDate, userid, userpw, username, location, userage, usergender,
    useremail, `authLevel`, nickname, cellphoneNum )
 VALUES 
-('test1', 'test1', '홍길동', 'test1', 25 , '남', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
-('test2', 'test2', '임꺽정', 'test2', 35 , '남', 'lgj992@hanmail.net',3,'회원2','01043214321'),
-('test3', 'test3', '심사임', 'test3', 45 , '여', 'llmom44@lycos.com',3,'회원3','01011112222');
+(NOW(),NOW(),'test1', 'test1', '홍길동', 'test1', 25 , '남', 'hongkil04@gmail.com', 7, '관리자', '01012341234'),
+(NOW(),NOW(),'test2', 'test2', '임꺽정', 'test2', 35 , '남', 'lgj992@hanmail.net',3,'회원2','01043214321'),
+(NOW(),NOW(),'test3', 'test3', '심사임', 'test3', 45 , '여', 'llmom44@lycos.com',3,'회원3','01011112222');
 
 CREATE TABLE `foodtype` (
 id INT(11) NOT NULL AUTO_INCREMENT,
@@ -349,7 +349,7 @@ ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT
 ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 댓글 테이블에 인덱스 추가
-ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
+ALTER TABLE `pmp`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
 
 # 파일 테이블 추가
 CREATE TABLE genFile (
@@ -398,15 +398,6 @@ SUM(IF(RP.point < 0, RP.point * -1,0)) AS badReactionPoint
 FROM reactionPoint AS RP
 GROUP BY RP.relTypeCode, RP.relId;
 
-
-SELECT IFNULL(SUM(RP.point),0)
-FROM reactionPoint AS RP
-WHERE RP.relTypeCode = 'article'
-AND RP.relId = 3
-AND RP.memberId = 2
-
-
-
 UPDATE article
 SET `body` = '내용4'
 WHERE id= 1;
@@ -434,18 +425,7 @@ DESC article;
 
 
 
-SELECT COUNT(*) AS cnt
-FROM article AS A
-WHERE 1
-AND A.boardId = 1
 
-SELECT *
-		  FROM article
-		  WHERE boardId = 1
-		  ORDER BY id DESC
-		  LIMIT 0, 10
-
-DESC `member`;
 
 SELECT LAST_INSERT_ID();
 
@@ -504,6 +484,4 @@ LEFT JOIN reactionPoint AS RP
 ON A.id = RP.relId AND RP.relTypeCode = 'article'
 GROUP BY A.id
 ORDER BY A.id DESC;
-
-
 
